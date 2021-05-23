@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://org.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.phone}"></title>
+</head>
+<body>
+<div style="
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        ">
+
+<!--    <img src="./2020-07-12_18-10-34.jpg" width="188", height="188" style="border-radius:50%;">-->
+    <h1 style="text-align: center;font-size:80px;color: #555;"th:text="${user.name}"></h1>
+    <div style="text-align: center;">
+        <a href="#" title="这是做题家的blog" style="text-align: center;font-size:xx-large;color:#555" >blog</a>
+    </div>
+</div>
+</body>
+</html>

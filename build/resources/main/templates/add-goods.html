@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.7/dist/css/layui.css">
+
+    <title>Title</title>
+</head>
+<body>
+<ul class="layui-nav" lay-filter="">
+    <li class="layui-nav-item"><a href="">首页</a></li>
+    <li class="layui-nav-item layui-this"><a href="">书</a></li>
+    <li class="layui-nav-item"><a href="">日常用品</a></li>
+    <li class="layui-nav-item"><a href="">食物服装</a></li>
+    <li class="layui-nav-item"><a href="">电子产品</a></li>
+    <li class="layui-nav-item"><a href=""></a></li>
+    <li class="layui-nav-item">
+        <a href="javascript:;">解决方案</a>
+        <dl class="layui-nav-child"> <!-- 二级菜单 -->
+            <dd><a href="">移动模块</a></dd>
+            <dd><a href="">后台模版</a></dd>
+            <dd><a href="">电商平台</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="">社区</a></li>
+</ul>
+<script src="//unpkg.com/layui@2.6.7/dist/layui.js"></script>
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+<!-- 加载我们的 React 组件。-->
+<script src="/js/add-goods.js"></script>
+
+</body>
+</html>
