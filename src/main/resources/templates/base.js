@@ -1,15 +1,15 @@
 const navStr =
-`<ul class="layui-nav" lay-filter="" v-if="true">
+`<ul class="layui-nav" lay-filter="" v-if="true" >
     <li class="layui-nav-item">
         <div class="layui-anim layui-anim-scaleSpring" id="home">
-            <span v-bind:title="message">
+            <span v-bind:title="home_message">
                 <a href=""><i class="layui-icon layui-icon-home"></i>首页</a>
             </span>
         </div>
     </li>
     <li class="layui-nav-item ">
         <div id="classification">
-            <span v-bind:title="message">
+            <span v-bind:title="classification_message">
                 <p><i class="layui-icon layui-icon-spread-left"></i>分类</p>
             </span>
         </div>
@@ -24,7 +24,7 @@ const navStr =
 
     <li class="layui-nav-item">
         <div id="shopping-cart">
-            <span v-bind:title="message">
+            <span v-bind:title="cart_message">
                 <a href=""><i class="layui-icon layui-icon-cart"></i>购物车</a>
             </span>
         </div>
@@ -32,7 +32,7 @@ const navStr =
 
     <li class="layui-nav-item">
         <div id="spance">
-            <span v-bind:title="message">
+            <span v-bind:title="spance_message">
                 <a href=""><i class="layui-icon layui-icon-username"></i>个人中心</a>
             </span>
         </div>
@@ -46,7 +46,6 @@ const navStr =
   </li>
 </ul>
 `
-$('#nav').prepend(navStr);
 function logout() {
     $.ajax({
 
@@ -69,35 +68,20 @@ function logout() {
 
 }
 
-// let nav = Vue.component('nav-content',{
-//     data:function () {
-//         return {
-//             count: 0
-//         }
-//     },
-//     template: navStr
-// })
-//
-// new Vue({el: '#nav'})
 
-
-let app1 = new Vue({
-    el: '#home',
-    data: {
-        message:'这里是首页'
+let nav = Vue.component('nav-content',{
+    template: navStr,
+    data() {
+        return {
+            home_message:'这里是首页',
+            classification_message:'这里显示分类',
+            cart_message:'这里是购物车',
+            spance_message:'这里是个人主页，可以查看订单'
+        }
     }
-});
+})
 
-let app2 = new Vue({
-    el: '#classification',
-    data: {
-        message:'这里显示分类'
-    }
-});
 
-let app3 = new Vue({
-    el: '#spance',
-    data: {
-        message:'这里是个人主页，可以查看订单'
-    }
+new Vue({
+    el: '#nav'
 })
