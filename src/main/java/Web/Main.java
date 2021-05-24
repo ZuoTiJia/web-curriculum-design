@@ -10,6 +10,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @Controller
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
@@ -153,6 +156,23 @@ public class Main {
     @ResponseBody
     public boolean checkPhone(@PathVariable("phone") long phone) {
         return null == DataBase.User().findOneUser(phone);
+    }
+
+    @PostMapping("/upload")
+    @ResponseBody
+    public String upload(@RequestParam("file") MultipartFile multipartFile)   {
+        File file = new File(Goods.filePath + multipartFile.getOriginalFilename());
+        try {
+            multipartFile.transferTo(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "true";
+    }
+
+    @RequestMapping("/image/{goodsId}")
+    public @ResponseBody byte[] getPhoto (@PathVariable int goodsId) {
+        return DataBase.Goods().findOneGoods(goodsId).getPhoto();
     }
 
 

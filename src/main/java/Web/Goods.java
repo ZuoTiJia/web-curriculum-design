@@ -21,7 +21,7 @@ enum GoodsState {
     onSale, offShelves;
 }
 public class Goods  {
-    private static String filePath = "/home/ccx/JetBrain/IDEAProjects/Web/src/main/resources/static/picture";
+    public static String filePath = "/home/ccx/JetBrain/IDEAProjects/Web/src/main/resources/static/picture";
 
     //id 必填
     private  int id;
