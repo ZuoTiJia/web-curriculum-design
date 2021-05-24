@@ -38,7 +38,7 @@ const navStr =
         </div>
     </li>
     <li class="layui-nav-item">
-    <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+    <a href=""><img src="https://t.cn/RCzsdCq" class="layui-nav-img">我</a>
     <dl class="layui-nav-child">
       <dd><a href="javascript:;">修改信息</a></dd>
       <dd><a onclick="">退出登录</a></dd>
