@@ -104,6 +104,22 @@ public class Main {
         System.out.println("add fail");
         return "false";
     }
+    @GetMapping(value = "/userLogout")
+    @ResponseBody
+    public String userLogout(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null) {
+            for(Cookie cookie: cookies) {
+                if(cookie.getName().equals("phone")) {
+                    cookie.setMaxAge(0);
+                }
+                if(cookie.getName().equals("token")) {
+                    cookie.setMaxAge(0);
+                }
+            }
+        }
+        return "true";
+    }
 
 
     @PostMapping("/userAdd")

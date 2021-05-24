@@ -41,23 +41,44 @@ const navStr =
     <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
     <dl class="layui-nav-child">
       <dd><a href="javascript:;">修改信息</a></dd>
-      <dd><a href="javascript:;">退出登录</a></dd>
+      <dd><a onclick="">退出登录</a></dd>
     </dl>
   </li>
 </ul>
-
-
-
-
-
-
 `
+$('#nav').prepend(navStr);
+function logout() {
+    $.ajax({
 
-let nav = Vue.component('nav-content',{
-    template: navStr
-})
+        type:"GET",
+        url:'http://localhost:8080/userLogout',
 
-new Vue({el: '#nav'})
+        success:function (result) {
+            alert(result);
+            if(result === "false") {
+                alert("注册失败, 已存在该用户");
+            } else {
+                window.location = "http://localhost:8080/login";
+            }
+
+        },
+        error:function (data) {
+            alert(JSON.stringify(data));
+        }
+    })
+
+}
+
+// let nav = Vue.component('nav-content',{
+//     data:function () {
+//         return {
+//             count: 0
+//         }
+//     },
+//     template: navStr
+// })
+//
+// new Vue({el: '#nav'})
 
 
 let app1 = new Vue({
