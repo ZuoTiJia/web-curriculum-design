@@ -99,15 +99,15 @@ function logInClick() {
     };
 
     if(checkPhone(userLogger.phone) === false) {
-        alert("Please Enter Correct Phone");
+        layer.alert("Please Enter Correct Phone");
     }
 
     if(checkPassword(userLogger.passWord) === false) {
 
-        alert("Please Enter Correct PassWord");
+        layer.alert("Please Enter Correct PassWord");
     }
 
-    alert(JSON.stringify(userLogger));
+    layer.alert(JSON.stringify(userLogger));
 
     $.ajax({
         type:"POST",
@@ -121,7 +121,7 @@ function logInClick() {
         },
 
         error:function (data) {
-            alert(JSON.stringify(data));
+            layer.alert(JSON.stringify(data));
         }
 
     })
@@ -131,7 +131,7 @@ function registerClick() {
     let passWord  = document.forms["logon"]["password"].value;
     let cPassWord = document.forms["logon"]["cpassword"].value;
     if (passWord !== cPassWord) {
-        alert("Please Affirm PassWord");
+        layer.alert("Please Affirm PassWord");
         return;
     }
 
@@ -145,25 +145,25 @@ function registerClick() {
         address:  document.forms["logon"]["address"].value,
     };
 
-    alert(JSON.stringify(user));
+    layer.alert(JSON.stringify(user));
 
     if(checkPhone(user.phone) === false) {
-        alert("Please Enter Correct Phone");
+        layer.alert("Please Enter Correct Phone");
         return;
     }
 
     if(checkPassword(user.passWord) === false) {
-        alert("Please Enter Correct PassWord");
+        layer.alert("Please Enter Correct PassWord");
         return ;
     }
 
     if(checkName(user.name) === false) {
-        alert("Please Enter Correct Name");
+        layer.alert("Please Enter Correct Name");
         return;
     }
 
     if(checkAddress(user.address) === false) {
-        alert("Please Enter Correct Address");
+        layer.alert("Please Enter Correct Address");
         return;
     }
 
@@ -177,10 +177,10 @@ function registerClick() {
         contentType: "application/json; charset=utf-8",
 
         success:function (result) {
-            alert(result);
+            layer.alert(result);
             if(result === "false") {
 
-                alert("注册失败, 已存在该用户");
+                layer.alert("注册失败, 已存在该用户");
 
             } else {
                 document.forms["logon"].reset();
@@ -190,7 +190,7 @@ function registerClick() {
 
         },
         error:function (data) {
-            alert(JSON.stringify(data));
+            layer.alert(JSON.stringify(data));
         }
     })
 }
