@@ -1,18 +1,16 @@
 const navStr =
 `<ul class="layui-nav" lay-filter="" v-if="true" >
     <li class="layui-nav-item">
-        <div class="layui-anim layui-anim-scaleSpring" id="home">
+        <div class="layui-anim layui-anim-scaleSpring" >
             <span v-bind:title="home_message">
                 <a href=""><i class="layui-icon layui-icon-home"></i>首页</a>
             </span>
         </div>
     </li>
     <li class="layui-nav-item ">
-        <div id="classification">
-            <span v-bind:title="classification_message">
-                <p><i class="layui-icon layui-icon-spread-left"></i>分类</p>
-            </span>
-        </div>
+        <span v-bind:title="classification_message">
+            <p><i class="layui-icon layui-icon-spread-left"></i>分类</p>
+        </span>
         <dl class="layui-nav-child">
             <dd><a href="">书</a></dd>
             <dd><a href="">日常用品</a></dd>
@@ -23,19 +21,15 @@ const navStr =
     </li>
 
     <li class="layui-nav-item">
-        <div id="shopping-cart">
-            <span v-bind:title="cart_message">
-                <a href=""><i class="layui-icon layui-icon-cart"></i>购物车</a>
-            </span>
-        </div>
+        <span v-bind:title="cart_message">
+            <a href=""><i class="layui-icon layui-icon-cart"></i>购物车</a>
+        </span>
     </li>
 
     <li class="layui-nav-item">
-        <div id="spance">
-            <span v-bind:title="spance_message">
-                <a href=""><i class="layui-icon layui-icon-username"></i>个人中心</a>
-            </span>
-        </div>
+        <span v-bind:title="spance_message">
+            <a href=""><i class="layui-icon layui-icon-username"></i>个人中心</a>
+        </span>
     </li>
     <li class="layui-nav-item">
     <a href=""><img src="https://t.cn/RCzsdCq" class="layui-nav-img">我</a>
