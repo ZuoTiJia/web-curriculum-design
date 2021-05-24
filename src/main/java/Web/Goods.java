@@ -2,12 +2,14 @@ package Web;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,6 +21,7 @@ enum GoodsState {
     onSale, offShelves;
 }
 public class Goods  {
+    private static String filePath = "/home/ccx/JetBrain/IDEAProjects/Web/src/main/resources/static/picture";
 
     //id 必填
     private  int id;
@@ -43,7 +46,7 @@ public class Goods  {
 
 
     //图片路径
-    private String photoPath;
+    private String photoName;
 
 
     //文字描述
@@ -76,8 +79,18 @@ public class Goods  {
         return goodsType;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
+    public String getPhotoName() {
+        return photoName;
+    }
+    public byte[] getPhoto() {
+        try {
+            InputStream inputStream = getClass().getResourceAsStream(filePath + this.photoName);
+            return IOUtils.toByteArray(inputStream);
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -111,7 +124,7 @@ public class Goods  {
             res.remnantInventory = rs.getInt("remnant_inventory");
             res.state     = GoodsState.valueOf(rs.getString("state"));
 
-            res.photoPath         = rs.getString("photo_path");
+            res.photoName         = rs.getString("photo_path");
             res.describe         = rs.getString("describe");
             res.cumulativeSales  = rs.getInt("cumulative_sales");
             return null;

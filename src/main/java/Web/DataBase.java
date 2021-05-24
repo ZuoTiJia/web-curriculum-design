@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DataBase {
     private final JdbcTemplate jdbcTemplate;
+    static private DataBase dataBase = new DataBase();
 
-    public DateBaseUser user;
-    public DateBaseGoods goods;
-    public DateBaseRecord record;
-    public DateBaseOrderForm orderForm;
+    public DataBaseUser user;
+    public DataBaseGoods goods;
+    public DataBaseRecord record;
+    public DataBaseOrderForm orderForm;
 
     public DataBase() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -23,11 +24,25 @@ public class DataBase {
         dataSource.setUsername("root");
         dataSource.setPassword("asd123");
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        user = new DateBaseUser();
-        goods = new DateBaseGoods();
+        user = new DataBaseUser();
+        goods = new DataBaseGoods();
     }
 
-    public class DateBaseUser {
+    public static DataBaseUser User() {
+        return dataBase.user;
+    }
+    public static DataBaseGoods Goods() {
+        return dataBase.goods;
+    }
+    public static DataBaseOrderForm OrderForm() {
+        return dataBase.orderForm;
+    }
+    public static DataBaseRecord Record() {
+        return dataBase.record;
+    }
+
+
+    public class DataBaseUser {
         public User findOneUser(long phoneNumber) {
             String sql = "SELECT * FROM users WHERE phone=?";
             return jdbcTemplate.queryForObject(sql, new User.UserRowMapper(), phoneNumber);
@@ -42,7 +57,7 @@ public class DataBase {
                     user.getAddress());
         }
     }
-    public class DateBaseGoods {
+    public class DataBaseGoods {
         public Goods findOneGoods(long goodsId) {
 
             String sql = "SELECT * FROM goods WHERE goods_id=?";
@@ -59,7 +74,7 @@ public class DataBase {
                     goods.getRemnantInventory(),
                     goods.getGoodsType().toString(),
                     goods.getStatus().toString(),
-                    goods.getPhotoPath(),
+                    goods.getPhotoName(),
                     goods.getDescribe(),
                     goods.getCumulativeSales());
         }
@@ -77,7 +92,7 @@ public class DataBase {
         }
 
     }
-    public class DateBaseRecord {
+    public class DataBaseRecord {
         public Iterable<Record> findRecords(long id) {
             String sql = "SELECT * FROM records WHERE id=?";
             return jdbcTemplate.query(sql, new Record.RecordRowMapper(), id);
@@ -94,7 +109,7 @@ public class DataBase {
 
     }
 
-    public class DateBaseOrderForm {
+    public class DataBaseOrderForm {
 
         public OrderForm findOneOrderForm(int id) {
             String sql = "SELECT * FROM order_forms WHERE id=?";

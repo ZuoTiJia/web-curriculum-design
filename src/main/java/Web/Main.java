@@ -14,7 +14,6 @@ import org.json.JSONObject;
 @Controller
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class Main {
-    static DataBase dataBase;
 
     @RequestMapping(value = "/user/{phone}", method = RequestMethod.GET)
     public String getUser(Model model, @PathVariable("phone") long userPhone, HttpServletRequest request) {
@@ -25,7 +24,7 @@ public class Main {
         if(!Login.checkLogin(request)) {
             return "login";
         }
-        User user = dataBase.user.findOneUser(userPhone);
+        User user = DataBase.User().findOneUser(userPhone);
         model.addAttribute(user);
         return "user";
     }
@@ -38,11 +37,11 @@ public class Main {
 
     @RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
     public String getOrderForm(Model model, @PathVariable("orderId") int orderId) {
-        OrderForm orderForm = dataBase.orderForm.findOneOrderForm(orderId);
-        Iterable<Record> records = dataBase.record.findRecords(orderId);
+        OrderForm orderForm = DataBase.OrderForm().findOneOrderForm(orderId);
+        Iterable<Record> records = DataBase.Record().findRecords(orderId);
 
         for(Record record:records) {
-            record.setGoods(dataBase.goods.findOneGoods(record.getGoodsId()));
+            record.setGoods(DataBase.Goods().findOneGoods(record.getGoodsId()));
         }
 
         model.addAttribute(orderForm);
@@ -65,7 +64,7 @@ public class Main {
     @ResponseBody
     public String userLogin(@RequestBody User.UserLogger userLogger,
                             HttpServletResponse response) {
-        User user = dataBase.user.findOneUser(userLogger.getPhone());
+        User user = DataBase.User().findOneUser(userLogger.getPhone());
 
         if(user.checkPassWord(userLogger.getPassWord())) {
             System.out.println("success");
@@ -93,10 +92,10 @@ public class Main {
         User user;
 
         try {
-            user = dataBase.user.findOneUser(newUser.getPhone());
+            user = DataBase.User().findOneUser(newUser.getPhone());
 
         } catch ( Exception e) {
-            dataBase.user.insertUser(newUser);
+            DataBase.User().insertUser(newUser);
             System.out.println("add success");
             return "true";
         }
@@ -132,28 +131,28 @@ public class Main {
     @PostMapping("/goodsAdd")
     @ResponseBody
     public String goodsAdd(@RequestBody Goods goods) {
-        dataBase.goods.insertGoods(goods);
+        DataBase.Goods().insertGoods(goods);
         return "success";
     }
 
     @GetMapping("/goodsDelete/{goodsId}")
     @ResponseBody
     public String goodsDelete(@PathVariable int goodsId) {
-        dataBase.goods.deleteGoods(goodsId);
+        DataBase.Goods().deleteGoods(goodsId);
         return "success";
     }
 
     @PostMapping("/goodsUpdate")
     @ResponseBody
     public String goodsUpdate(@RequestBody Goods goods) {
-        dataBase.goods.updateGoods(goods.getId(), goods);
+        DataBase.Goods().updateGoods(goods.getId(), goods);
         return "success";
     }
 
     @GetMapping("/checkPhone/{phone}")
     @ResponseBody
     public boolean checkPhone(@PathVariable("phone") long phone) {
-        return null == dataBase.user.findOneUser(phone);
+        return null == DataBase.User().findOneUser(phone);
     }
 
 
@@ -162,7 +161,6 @@ public class Main {
 
 
     public static void main(String[] args) {
-        dataBase = new DataBase();
         SpringApplication.run(Main.class, args);
     }
 
