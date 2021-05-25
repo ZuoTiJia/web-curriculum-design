@@ -66,8 +66,8 @@ public class DataBase {
         }
 
         public void insertGoods(Goods goods) {
-            String sql = "INSERT INTO goods (name, price, businessPhone, remnant_inventory, " +
-                    "goods_type, `state`, photo_path, `describe`, cumulative_sales) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO goods (name, price, business_phone, remnant_inventory, " +
+                    "goods_type, `state`, photo_path, `describe`, cumulative_sales) VALUES (?,?,?,?,?,?,?,?,?)";
             jdbcTemplate.update(sql, goods.getName(),
                     goods.getPrice(),
                     goods.getBusinessPhone(),

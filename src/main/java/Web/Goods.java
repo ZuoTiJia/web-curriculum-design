@@ -21,7 +21,7 @@ enum GoodsState {
     onSale, offShelves;
 }
 public class Goods  {
-    public static String filePath = "/home/ccx/JetBrain/IDEAProjects/Web/src/main/resources/static/picture";
+    public static String filePath = "/home/ccx/JetBrain/IDEAProjects/Web/src/main/resources/static/picture/";
 
     //id 必填
     private  int id;
@@ -73,6 +73,10 @@ public class Goods  {
 
     public long getBusinessPhone() {
         return businessPhone;
+    }
+
+    public GoodsState getState() {
+        return state;
     }
 
     public GoodsType getGoodsType() {

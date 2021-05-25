@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS goods (
     goods_type CHAR(15) NOT NULL,
     state CHAR(15) NOT NULL,
 
-    photo_path CHAR(20) ,
+    photo_path VARCHAR(50) ,
     `describe` VARCHAR(200),
     cumulative_sales INT,
     FOREIGN KEY(business_phone) REFERENCES users(phone)
@@ -48,4 +48,4 @@ CREATE TABLE IF NOT EXISTS records (
     FOREIGN KEY(goods_id) REFERENCES goods(id)
 );
 
-INSERT INTO users (phone, pass_word, name, user_type, user_address) VALUE(18843336720, "asd123", "ccx", "Admin", null);
+INSERT INTO users (phone, pass_word, name, user_type, user_address) VALUE(18843336720, 'asd123', 'ccx', 'Admin', null);

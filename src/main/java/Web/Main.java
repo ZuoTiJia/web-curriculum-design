@@ -134,6 +134,9 @@ public class Main {
     @PostMapping("/goodsAdd")
     @ResponseBody
     public String goodsAdd(@RequestBody Goods goods) {
+        if(goods == null) {
+
+        }
         DataBase.Goods().insertGoods(goods);
         return "success";
     }
@@ -172,7 +175,14 @@ public class Main {
 
     @RequestMapping("/image/{goodsId}")
     public @ResponseBody byte[] getPhoto (@PathVariable int goodsId) {
+
         return DataBase.Goods().findOneGoods(goodsId).getPhoto();
+
+    }
+
+    @RequestMapping("/manageGoods")
+    public String manageGoods() {
+        return "add-goods";
     }
 
 

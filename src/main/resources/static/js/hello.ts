@@ -39,14 +39,4 @@ let allCookies = document.cookie;
 console.log(allCookies);
 
 
-//     .catch(reason => {
-//     console.log("hello");
-// });
-
-
-// axios.get('http://localhost:8080/18843336720').then(function (response) {
-//     console.log(response.data);
-// }).catch(reason => {
-//     console.log(reason);
-// });
 
