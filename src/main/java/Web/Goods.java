@@ -88,7 +88,10 @@ public class Goods  {
     }
     public byte[] getPhoto() {
         try {
+            String path =  filePath + photoName;
+            System.out.println(path);
             InputStream inputStream = getClass().getResourceAsStream(filePath + this.photoName);
+            
             return IOUtils.toByteArray(inputStream);
 
         } catch (Exception e){
@@ -131,7 +134,7 @@ public class Goods  {
             res.photoName         = rs.getString("photo_path");
             res.describe         = rs.getString("describe");
             res.cumulativeSales  = rs.getInt("cumulative_sales");
-            return null;
+            return res;
         }
     }
 }

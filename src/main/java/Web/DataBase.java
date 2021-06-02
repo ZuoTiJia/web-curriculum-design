@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository
@@ -60,7 +62,7 @@ public class DataBase {
     public class DataBaseGoods {
         public Goods findOneGoods(long goodsId) {
 
-            String sql = "SELECT * FROM goods WHERE goods_id=?";
+            String sql = "SELECT * FROM goods WHERE id=?";
             return jdbcTemplate.queryForObject(sql, new Goods.GoodsRowMapper(), goodsId);
 
         }
@@ -89,6 +91,11 @@ public class DataBase {
         public void updateGoods(long oldGoodsId, Goods newGoods) {
             deleteGoods(oldGoodsId);
             insertGoods(newGoods);
+        }
+
+        public List<Goods> findAllGoods() {
+            String sql = "SELECT * FROM goods";
+            return jdbcTemplate.query(sql, new Goods.GoodsRowMapper()) ;
         }
 
     }

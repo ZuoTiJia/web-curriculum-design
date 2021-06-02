@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
@@ -34,7 +36,11 @@ public class Main {
 
 
     @RequestMapping(value="/")
-    public String home() {
+    public String home(Model model) {
+
+        List<Goods> goodsList = DataBase.Goods().findAllGoods();
+        model.addAttribute(goodsList);
+
         return "home";
     }
 
@@ -75,7 +81,7 @@ public class Main {
             cookie.setPath("/");
             cookie.setMaxAge(60*60);
             response.addCookie(cookie);
-            cookie = new Cookie("phone", String.valueOf(18843336720L));
+            cookie = new Cookie("phone", String.valueOf(user.getPhone()));
             cookie.setMaxAge(60*60);
             cookie.setPath("/");
             response.addCookie(cookie);
@@ -175,6 +181,7 @@ public class Main {
 
     @RequestMapping("/image/{goodsId}")
     public @ResponseBody byte[] getPhoto (@PathVariable int goodsId) {
+        System.out.println(goodsId);
 
         return DataBase.Goods().findOneGoods(goodsId).getPhoto();
 

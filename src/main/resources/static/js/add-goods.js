@@ -76,6 +76,9 @@ layui.use(['form', 'layedit', 'laydate'], function () {
                     layer.alert("提交失败");
                 } else {
                     layer.alert('提交成功');
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
                 }
             },
             error: function (good) {
@@ -135,6 +138,7 @@ layui.use(['upload', 'element', 'layer'], function () {
                 uploadInst.upload();
             });
         }
+
         //进度条
         , progress: function (n, index, e) {
             element.progress('demo', n + '%'); //可配合 layui 进度条元素使用

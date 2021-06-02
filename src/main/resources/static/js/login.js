@@ -108,6 +108,9 @@ function logInClick() {
     }
 
     layer.alert(JSON.stringify(userLogger));
+    // $.removeCookie('phone');
+    // $.removeCookie('token');
+
 
     $.ajax({
         type:"POST",
