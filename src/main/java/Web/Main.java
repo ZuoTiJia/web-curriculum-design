@@ -201,8 +201,10 @@ public class Main {
     }
 
 //    @PostMapping("/orderAdd")
-//    @RequestBody
-//    public String orderAdd(@RequestBody goodsIds) {
+//    @ResponseBody
+//    public String orderAdd(@RequestBody OrderForm.Order order) {
+//        OrderForm orderForm = new OrderForm();
+//
 //
 //    }
 

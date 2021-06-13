@@ -11,28 +11,31 @@ import java.util.List;
 public class OrderForm {
     public static class Order {
         public static class GoodsNumber {
+            private int goodsId;
+            private int number;
 
+            public int getGoodsId() {
+                return goodsId;
+            }
 
+            public int getNumber() {
+                return number;
+            }
         }
         private long customPhone;
-        private int[] goodsIds;
+        private GoodsNumber[] goodsNumbers;
 
         public long getCustomPhone() {
             return customPhone;
         }
 
-        public int[] getGoodsIds() {
-            return goodsIds;
+        public GoodsNumber[] getGoodsNumbers() {
+            return goodsNumbers;
         }
-
-//        public String getAddress() {
-//            return address;
-//        }
     }
 
     private int id;
     private long customPhone;
-    private String address;
     private java.util.Date time;
     private double totalPrice;
 
@@ -44,10 +47,6 @@ public class OrderForm {
 
     public long getCustomPhone() {
         return customPhone;
-    }
-
-    public String getAddress() {
-        return address;
     }
 
     public Date getTime() {
@@ -67,7 +66,6 @@ public class OrderForm {
             OrderForm res = new OrderForm();
             res.id = rs.getInt("id");
             res.customPhone = rs.getLong("custom_phone");
-            res.address = rs.getString("address");
             res.time = rs.getTimestamp("time");
             res.totalPrice = rs.getDouble("total_price");
             return res;

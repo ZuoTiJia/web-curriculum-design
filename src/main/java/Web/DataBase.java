@@ -124,10 +124,9 @@ public class DataBase {
         }
 
         public void insertOrderForm(OrderForm orderForm) {
-            String sql = "INSERT INTO order_forms (custom_id, address, time, total_price) " +
-                    "VALUES (?,?,?,?)";
+            String sql = "INSERT INTO order_forms (custom_id, time, total_price) " +
+                    "VALUES (?,?,?)";
             jdbcTemplate.update(sql, orderForm.getCustomPhone(),
-                    orderForm.getAddress(),
                     new java.sql.Timestamp(orderForm.getTime().getTime()),
                     orderForm.getTotalPrice());
         }
