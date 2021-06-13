@@ -66,7 +66,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
         $.ajax({
 
             type: "POST",
-            url: 'http://localhost:8080/goodsAdd',
+            url: 'http://10.151.250.175:8080/goodsAdd',
             data: JSON.stringify(good),
 
             contentType: "application/json; charset=utf-8",
@@ -110,7 +110,7 @@ layui.use(['upload', 'element', 'layer'], function () {
     //常规使用 - 普通图片上传
     var uploadInst = upload.render({
         elem: '#test1'
-        , url: 'http://localhost:8080/upload' //改成您自己的上传接口
+        , url: 'http://10.151.250.175:8080/upload' //改成您自己的上传接口
         , before: function (obj) {
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {

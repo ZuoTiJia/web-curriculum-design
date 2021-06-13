@@ -44,14 +44,14 @@ function logout() {
     $.ajax({
 
         type:"GET",
-        url:'http://localhost:8080/userLogout',
+        url:'http://10.151.250.175:8080/userLogout',
 
         success:function (result) {
             alert(result);
             if(result === "false") {
                 alert("注册失败, 已存在该用户");
             } else {
-                window.location = "http://localhost:8080/login";
+                window.location = "http://10.151.250.175:8080/login";
             }
 
         },

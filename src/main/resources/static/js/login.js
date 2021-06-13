@@ -114,7 +114,7 @@ function logInClick() {
 
     $.ajax({
         type:"POST",
-        url:'http://localhost:8080/userLogin',
+        url:'http://10.151.250.175:8080/userLogin',
         data: JSON.stringify(userLogger),
         contentType: "application/json; charset=utf-8",
 
@@ -175,7 +175,7 @@ function registerClick() {
     $.ajax({
 
         type:"POST",
-        url:'http://localhost:8080/userRegister',
+        url:'http://10.151.250.175:8080/userRegister',
         data: JSON.stringify(user),
         contentType: "application/json; charset=utf-8",
 
@@ -187,7 +187,7 @@ function registerClick() {
 
             } else {
                 document.forms["logon"].reset();
-                window.location = "http://localhost:8080/login";
+                window.location = "http://10.151.250.175:8080/login";
 
             }
 
