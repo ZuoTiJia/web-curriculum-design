@@ -34,17 +34,32 @@
     <nav-content></nav-content>
 </div>
 
+<div class="item-card" th:each="goods:${goodsList}">
+    <hide
 
-<div th:each="goods : ${goodsList}">
-<div class="layui-col-md6">
-    <div class="layui-panel">
-        <img th:src="@{/image/{id}(id=${goods.id})}">
+    <img th:src="@{/image/{id}(id=${goods.id})}">
+    <div class="item-right">
         <span th:text="${goods.name}"></span>
-        <p th:text="${goods.id}"></p>
-        <p th:text="${goods.price}"></p>
+        <div class="item-price">
+            <p style="color:#F00" th:text="${goods.price}"></p> &nbsp;&nbsp;
+            <span>
+            <p style="color:#999" th:text="${goods.cumulativeSales}"></p>
+            </span>
+        </div>
     </div>
+<!--    <p th:text="${goods.id}"></p>-->
 </div>
-</div>
+
+<!--<div th:each="goods : ${goodsList}">-->
+<!--<div class="layui-col-md6">-->
+<!--    <div class="layui-panel">-->
+<!--        <img th:src="@{/image/{id}(id=${goods.id})}">-->
+<!--        <span th:text="${goods.name}"></span>-->
+<!--        <p th:text="${goods.id}"></p>-->
+<!--        <p th:text="${goods.price}"></p>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
 <script src="https://unpkg.com/layui@2.6.7/dist/layui.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="/js/jquery-3.6.0.min.js"></script>

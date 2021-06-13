@@ -39,6 +39,7 @@ public class Main {
     public String home(Model model) {
 
         List<Goods> goodsList = DataBase.Goods().findAllGoods();
+        System.out.println(goodsList);
         model.addAttribute(goodsList);
 
         return "home";
@@ -184,13 +185,26 @@ public class Main {
         System.out.println(goodsId);
 
         return DataBase.Goods().findOneGoods(goodsId).getPhoto();
-
     }
+
+    @RequestMapping("/goods/{goodsId}")
+    @ResponseBody
+    public Goods getGoods(@PathVariable int goodsId) {
+        Goods goods = DataBase.Goods().findOneGoods(goodsId);
+        return goods;
+    }
+
 
     @RequestMapping("/manageGoods")
     public String manageGoods() {
         return "add-goods";
     }
+
+//    @PostMapping("/orderAdd")
+//    @RequestBody
+//    public String orderAdd(@RequestBody goodsIds) {
+//
+//    }
 
 
 

@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -90,8 +92,11 @@ public class Goods  {
         try {
             String path =  filePath + photoName;
             System.out.println(path);
-            InputStream inputStream = getClass().getResourceAsStream(filePath + this.photoName);
-            
+
+            File photoFile = new File(path);
+            FileInputStream inputStream = new FileInputStream(photoFile);
+//            InputStream inputStream = getClass().getResourceAsStream(filePath + this.photoName);
+
             return IOUtils.toByteArray(inputStream);
 
         } catch (Exception e){
