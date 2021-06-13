@@ -44,6 +44,15 @@ public class Record  {
     public void setGoods(Goods goods) {
         this.goods = goods;
     }
+    public Record() {
+
+    }
+    public Record(int orderFormId, int goodsId, int number, RecordType recordType) {
+        this.orderFormId = orderFormId;
+        this.goodsId = goodsId;
+        this.number = number;
+        this.recordType = recordType;
+    }
 
     public static class RecordRowMapper implements RowMapper<Record> {
         @Override

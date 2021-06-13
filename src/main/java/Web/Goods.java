@@ -91,8 +91,6 @@ public class Goods  {
     public byte[] getPhoto() {
         try {
             String path =  filePath + photoName;
-            System.out.println(path);
-
             File photoFile = new File(path);
             FileInputStream inputStream = new FileInputStream(photoFile);
 //            InputStream inputStream = getClass().getResourceAsStream(filePath + this.photoName);

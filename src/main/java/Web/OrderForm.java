@@ -24,6 +24,7 @@ public class OrderForm {
         }
         private long customPhone;
         private GoodsNumber[] goodsNumbers;
+        private double totalPrice;
 
         public long getCustomPhone() {
             return customPhone;
@@ -31,6 +32,10 @@ public class OrderForm {
 
         public GoodsNumber[] getGoodsNumbers() {
             return goodsNumbers;
+        }
+
+        public double getTotalPrice() {
+            return totalPrice;
         }
     }
 
@@ -57,7 +62,14 @@ public class OrderForm {
         return totalPrice;
     }
 
-    public OrderForm(){}
+    public OrderForm(long customPhone, double totalPrice) {
+        this.customPhone = customPhone;
+        this.totalPrice = totalPrice;
+    }
+
+    public OrderForm() {
+
+    }
 
     public static class OrderFormRowMapper implements RowMapper<OrderForm> {
 

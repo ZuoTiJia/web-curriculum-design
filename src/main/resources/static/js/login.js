@@ -107,24 +107,26 @@ function logInClick() {
         layer.alert("Please Enter Correct PassWord");
     }
 
-    layer.alert(JSON.stringify(userLogger));
+    // layer.alert(JSON.stringify(userLogger));
     // $.removeCookie('phone');
     // $.removeCookie('token');
 
 
     $.ajax({
         type:"POST",
-        url:'http://10.151.250.175:8080/userLogin',
+        url:'http://localhost:8080/userLogin',
         data: JSON.stringify(userLogger),
         contentType: "application/json; charset=utf-8",
 
         success:function (result) {
             console.log(result);
             document.forms["login"].reset();
+            window.location.replace( "/")
         },
 
         error:function (data) {
             layer.alert(JSON.stringify(data));
+
         }
 
     })
@@ -175,7 +177,7 @@ function registerClick() {
     $.ajax({
 
         type:"POST",
-        url:'http://10.151.250.175:8080/userRegister',
+        url:'http://localhost:8080/userRegister',
         data: JSON.stringify(user),
         contentType: "application/json; charset=utf-8",
 
@@ -187,7 +189,7 @@ function registerClick() {
 
             } else {
                 document.forms["logon"].reset();
-                window.location = "http://10.151.250.175:8080/login";
+                window.location = "http://localhost:8080/login";
 
             }
 

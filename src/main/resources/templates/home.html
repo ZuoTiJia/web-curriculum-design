@@ -5,50 +5,49 @@
     <title>Home</title>
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/layui@2.6.7/dist/css/layui.css">
     <style>
-        .item-card {
-            border-top: 0.3px solid #999;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            margin: 5px 0;
-        }
-        .item-card img {
-            width: 30%;
-        }
-        .item-right {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-        .item-price {
-            display: flex;
-            justify-content: space-between;
-        }
+        /*.item-card {*/
+        /*    border-top: 0.3px solid #999;*/
+        /*    box-sizing: border-box;*/
+        /*    display: flex;*/
+        /*    flex-direction: row;*/
+        /*    justify-content: space-between;*/
+        /*    margin: 5px 0;*/
+        /*}*/
+        /*.item-card img {*/
+        /*    width: 30%;*/
+        /*}*/
+        /*.item-right {*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*    justify-content: space-around;*/
+        /*}*/
+        /*.item-price {*/
+        /*    display: flex;*/
+        /*    justify-content: space-between;*/
+        /*}*/
     </style>
 </head>
 
 <body>
 
-<div id="nav">
-    <nav-content></nav-content>
-</div>
-
 <div class="item-card" th:each="goods:${goodsList}">
 <!--    <hide-->
 
-    <img th:src="@{/image/{id}(id=${goods.id})}">
-    <div class="item-right">
-        <span th:text="${goods.name}"></span>
-        <div class="item-price">
-            <p style="color:#F00" th:text="${goods.price}"></p> &nbsp;&nbsp;
-            <span>
-            <p style="color:#999" th:text="${goods.cumulativeSales}"></p>
-            </span>
-        </div>
-    </div>
+<!--    <img th:src="@{/image/{id}(id=${goods.id})}">-->
+<!--    <div class="item-right">-->
+<!--        <span th:text="${goods.name}"></span>-->
+<!--        <div class="item-price">-->
+<!--            <p style="color:#F00" th:text="${goods.price}"></p> &nbsp;&nbsp;-->
+<!--            <span>-->
+<!--            <p style="color:#999" th:text="${goods.cumulativeSales}"></p>-->
+<!--            </span>-->
+<!--        </div>-->
+<!--    </div>-->
 <!--    <p th:text="${goods.id}"></p>-->
 </div>
+
+<ul class="flow-default" id="flow"></ul>
+
 
 <!--<div th:each="goods : ${goodsList}">-->
 <!--<div class="layui-col-md6">-->
@@ -60,14 +59,18 @@
 <!--    </div>-->
 <!--</div>-->
 <!--</div>-->
-<script src="https://unpkg.com/layui@2.6.7/dist/layui.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="http://10.151.250.175:8080/js/jquery-3.6.0.min.js"></script>
-<script src="http://10.151.250.175:8080/js/jquery.cookie-1.4.1.min.js"></script>
+
+<script src="/js/layui.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/jquery.cookie-1.4.1.min.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 <script>
 </script>
 <!-- 加载我们的 React 组件。-->
-<script src="http://10.151.250.175:8080/js/base.js"></script>
+<script src="/js/base.js"></script>
+<script>
+
+</script>
 </body>
 </html>

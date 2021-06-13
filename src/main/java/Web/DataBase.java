@@ -2,9 +2,15 @@ package Web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +34,8 @@ public class DataBase {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         user = new DataBaseUser();
         goods = new DataBaseGoods();
+        orderForm = new DataBaseOrderForm();
+        record = new DataBaseRecord();
     }
 
     public static DataBaseUser User() {
@@ -95,12 +103,25 @@ public class DataBase {
 
         public List<Goods> findAllGoods() {
             String sql = "SELECT * FROM goods";
-            return jdbcTemplate.query(sql, new Goods.GoodsRowMapper()) ;
+            return jdbcTemplate.query(sql, new Goods.GoodsRowMapper());
         }
 
+        public List<Goods> findAllBooks() {
+            String sql = "SELECT * FROM goods WHERE goods_type='Book'";
+            return jdbcTemplate.query(sql, new Goods.GoodsRowMapper());
+        }
+        public List<Goods> findAllFood() {
+            String sql = "SELECT * FROM goods WHERE goods_type='Food'";
+            return jdbcTemplate.query(sql, new Goods.GoodsRowMapper());
+        }
+
+        public List<Goods> findAllElectronics() {
+            String sql = "SELECT * FROM goods WHERE goods_type='Electronics'";
+            return jdbcTemplate.query(sql, new Goods.GoodsRowMapper());
+        }
     }
     public class DataBaseRecord {
-        public Iterable<Record> findRecords(long id) {
+        public List<Record> findRecords(long id) {
             String sql = "SELECT * FROM records WHERE id=?";
             return jdbcTemplate.query(sql, new Record.RecordRowMapper(), id);
         }
@@ -123,18 +144,33 @@ public class DataBase {
             return jdbcTemplate.queryForObject(sql, new OrderForm.OrderFormRowMapper(), id);
         }
 
-        public void insertOrderForm(OrderForm orderForm) {
-            String sql = "INSERT INTO order_forms (custom_id, time, total_price) " +
-                    "VALUES (?,?,?)";
-            jdbcTemplate.update(sql, orderForm.getCustomPhone(),
-                    new java.sql.Timestamp(orderForm.getTime().getTime()),
-                    orderForm.getTotalPrice());
-        }
+//        public void insertOrderForm(OrderForm orderForm) {
+//            String sql = "INSERT INTO order_forms (custom_id,, total_price) " +
+//                    "VALUES (?,?,?)";
+//            jdbcTemplate.update(sql, orderForm.getCustomPhone(),
+//                    new java.sql.Timestamp(orderForm.getTime().getTime()),
+//                    orderForm.getTotalPrice());
+//        }
 
-        public Iterable<OrderForm> findOrderForms(long customPhone) {
+        public List<OrderForm> findOrderForms(long customPhone) {
             String sql = "SELECT * FROM order_forms WHERE custom_phone=?";
             return jdbcTemplate.query(sql, new OrderForm.OrderFormRowMapper(), customPhone);
         }
 
+        public int insertAndGetKey(OrderForm orderForm) {
+            String sql = "INSERT INTO order_forms (custom_id, total_price) " +
+                    "VALUES (?,?)";
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            jdbcTemplate.update(new PreparedStatementCreator() {
+                @Override
+                public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                    PreparedStatement ps = con.prepareStatement(sql, new String[] {"id"});
+                    ps.setLong(1, 0);
+                    return ps;
+                }
+            }, keyHolder);
+            int a = keyHolder.getKey().intValue();
+            return a;
+        }
     }
 }

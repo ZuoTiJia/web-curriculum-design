@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="/css/layui.css">
+    <style>
+        .profile {
+            border-radius: 50%;
+            width: 20vmin;
+            height: 20vmin;
+            object-fit: cover;
+            object-position: center;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-bg-gray" style="padding: 30px;">
+    <div style="text-align: center;margin-top: 30px;">
+        <img src="https://t.cn/RCzsdCq" class="layui-nav-img profile">
+        <br>
+
+        <div style="margin-bottom: 30px;">
+            <h1 th:text="${user.name}"></h1>
+        </div>
+    </div>
+
+    <div class="layui-row layui-col-space15" th:each="order:${orderFormList}">
+
+        <div class="layui-col-md12">
+            <div class="layui-panel">
+                <div style="padding: 50px 30px;display: inline" th:text="${order.id}"></div>
+                <div style="display: inline" th:text="${order.totalPrice}"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/jquery.cookie-1.4.1.min.js"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/base.js"></script>
+</body>
+</html>
