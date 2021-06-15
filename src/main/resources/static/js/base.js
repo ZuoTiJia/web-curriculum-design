@@ -200,6 +200,7 @@ const detailString =
     `
 Vue.component('goods-detail', {
     template: detailString,
+    props:['goods'],
     methods: {
         addCart:function (goodsId) {
             addCart(goodsId);

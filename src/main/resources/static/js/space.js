@@ -2,7 +2,7 @@ const orderDetailString = `
 
 <div>
     <ul>
-        <li v-for="goodsAndNumber in order" @click="showDetail()">
+        <li v-for="goodsAndNumber in order" @click="showOrderDetail()">
             <p>{{goodsAndNumber.number}}</p>
             <p>{{goodsAndNumber.name}}</p>
             <p>{{goodsAndNumber.price}}</p>
@@ -16,6 +16,12 @@ const orderDetailString = `
 `
 Vue.component('order-detail', {
     template: orderDetailString,
+    props:['goodsAndNumber', 'allPrice'],
+    methods: {
+
+    }
+
+
 
 })
 

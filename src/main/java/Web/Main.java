@@ -347,7 +347,7 @@ public class Main {
      * @param orderId
      * @return
      */
-    @GetMapping("/order/{orderId}")
+    @GetMapping("/record/{orderId}")
     @ResponseBody
     public OrderForm getOrder(@PathVariable int orderId) {
         OrderForm orderForm = DataBase.OrderForm().findOneOrderForm(orderId);
@@ -359,6 +359,7 @@ public class Main {
      * @param phone
      * @return
      */
+
     @GetMapping("/orders/{phone}")
     @ResponseBody
     public Iterable<OrderForm> getOrders(@PathVariable long phone) {

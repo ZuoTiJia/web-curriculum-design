@@ -19,31 +19,25 @@ function GoodsAndNumber(goodsId, number, name, price) {
     this.price = price;
 }
 
-function showDetail() {
-
-
-}
 
 $(".showSingleGood").find("button").click(function () {
     let goodsId = $(this).attr("data");
     $.ajax({
 
         type:"GET",
-        url:'http://localhost:8080/goods/' + goodsId,
+        url:'/goods/' + goodsId,
         contentType: "application/json; charset=utf-8",
 
         success:function (result) {
-            let goods = result;
-
             layer.open({
                 type: 1,
-                content: detail
+                content:'<div id="detail"><goods-detail v-bind:goods="goods"></goods-detail></div>'
             });
             //绑定数据
             new Vue({
                 el: '#detail',
                 data: {
-                    goods: result
+                    goods:result
                 }
             });
         },
