@@ -28,7 +28,7 @@ public class DataBase {
     public DataBase() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("java.sql.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/web");
+        dataSource.setUrl("jdbc:mysql://10.151.250.175:3306/web");
         dataSource.setUsername("root");
         dataSource.setPassword("asd123");
         this.jdbcTemplate = new JdbcTemplate(dataSource);

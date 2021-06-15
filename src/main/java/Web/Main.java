@@ -365,18 +365,6 @@ public class Main {
         return DataBase.OrderForm().findOrderForms(phone);
     }
 
-    @PostMapping("/cart")
-    public String getCart(@RequestBody OrderForm.GoodsNumber[] goodsNumbers, Model model) {
-        ArrayList<Goods> goodsList = new ArrayList<Goods>();
-
-        for(OrderForm.GoodsNumber goodsNumber: goodsNumbers) {
-            Goods goods = DataBase.Goods().findOneGoods(goodsNumber.getGoodsId());
-            goodsList.add(goods);
-        }
-
-        model.addAttribute("goodsList", goodsList);
-        return "cart";
-    }
 
 
 

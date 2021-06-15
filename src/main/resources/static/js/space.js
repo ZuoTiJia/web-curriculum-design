@@ -16,7 +16,7 @@ const orderDetailString = `
 `
 Vue.component('order-detail', {
     template: orderDetailString,
-    
+
 })
 
 $(".showSingleOrder").click(function () {

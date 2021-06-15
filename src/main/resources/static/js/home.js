@@ -10,21 +10,8 @@ layui.use(['carousel', 'form'], function () {
     });
 });
 
-const detailString =
-    `
-    <div id="detail">
-        <p>{{goodsName}}</p>
-        <p>{{goodsPrice}}</p>
-        <p>{{goodsBusinessPhone}}</p>
-        <p>{{goodsRemnantInventory}}</p>
-        <p>{{goodsType}}</p>
-        <p>{{goodsDescribe}}</p>
-        <button class="layui-btn layui-btn-normal">添加至购物车</button>
-    </div>
-    `
-new Vue.component('goods-detail', {
-    template: detailString
-})
+
+
 function GoodsAndNumber(goodsId, number, name, price) {
     this.goodsId = goodsId;
     this.number = number;
@@ -47,12 +34,6 @@ $(".showSingleGood").find("button").click(function () {
 
         success:function (result) {
             let goods = result;
-            let goodsName = goods.name;
-            let goodsPrice = goods.price;
-            let goodsBusinessPhone = goods.businessPhone;
-            let goodsRemnantInventory = goods.remnantInventory;
-            let goodsType = goods.goodsType;
-            let goodsDescribe = goods.describe;
 
             layer.open({
                 type: 1,
@@ -62,27 +43,8 @@ $(".showSingleGood").find("button").click(function () {
             new Vue({
                 el: '#detail',
                 data: {
-                    goodsName: goodsName,
-                    goodsPrice: goodsPrice,
-                    goodsBusinessPhone: goodsBusinessPhone,
-                    goodsRemnantInventory: goodsRemnantInventory,
-                    goodsType: goodsType,
-                    goodsDescribe: goodsDescribe
+                    goods: result
                 }
-            });
-            function addCart(goodsId) {
-                for(let i=0; i < cart.length; i++) {
-                    if(cart[i].goodsId === goodsId) {
-                        cart[i].number += 1;
-                        return;
-                    }
-                }
-                cart.push(new GoodsAndNumber(goodsId, 1, goodsName, goodsPrice));
-            }
-            $('#detail').find("button").on('click', function () {
-                addCart(goodsId);
-                layer.alert("添加成功");
-                console.log(cart);
             });
         },
         error:function (data) {
