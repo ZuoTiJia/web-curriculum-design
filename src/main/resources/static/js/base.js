@@ -52,6 +52,12 @@ function getPhone() {
         return Number(phone);
     }
 }
+function GoodsAndNumber(goodsId, number, name, price) {
+    this.goodsId = goodsId;
+    this.number = number;
+    this.name = name;
+    this.price = price;
+}
 //购物车组件
 cartString =
     `
@@ -152,7 +158,10 @@ Vue.component('nav-component', {
         //进入个人空间
         space: function () {
             let phone = getPhone();
-            window.location.replace('/user/' + phone);
+            if(phone) {
+                window.location.replace('/user/' + phone);
+            }
+
         },
         //展示购物车
         showCart: function () {

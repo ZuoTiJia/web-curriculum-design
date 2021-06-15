@@ -12,12 +12,7 @@ layui.use(['carousel', 'form'], function () {
 
 
 
-function GoodsAndNumber(goodsId, number, name, price) {
-    this.goodsId = goodsId;
-    this.number = number;
-    this.name = name;
-    this.price = price;
-}
+
 
 
 $(".showSingleGood").find("button").click(function () {

@@ -126,7 +126,7 @@ public class DataBase {
         }
     }
     public class DataBaseRecord {
-        public List<Record> findRecords(long id) {
+        public List<Record> findRecords(int id) {
             String sql = "SELECT * FROM records WHERE id=?";
             return jdbcTemplate.query(sql, new Record.RecordRowMapper(), id);
         }
@@ -137,6 +137,15 @@ public class DataBase {
                     record.getGoodsId(),
                     record.getNumber(),
                     record.getRecordType().toString());
+        }
+        public List<Record.RecordGoodsDetail> findRecordGoodsDetail(int orderId) {
+            String sql = "SELECT records.goods_id AS id, records.number AS number, " +
+                    "goods.name AS name, goods.price AS price " +
+                    "FROM records LEFT JOIN goods " +
+                    "ON records.goods_id = goods.id " +
+                    "WHERE records.order_form_id = ?";
+            return jdbcTemplate.query(sql, new Record.RecordGoodsDetail.RecordGoodsDetailMapRow(), orderId);
+
         }
 
     }
@@ -160,6 +169,8 @@ public class DataBase {
             String sql = "SELECT * FROM order_forms WHERE custom_phone=?";
             return jdbcTemplate.query(sql, new OrderForm.OrderFormRowMapper(), customPhone);
         }
+
+
 
         public int insertAndGetKey(OrderForm orderForm) {
             String sql = "INSERT INTO order_forms (custom_phone, total_price) " +

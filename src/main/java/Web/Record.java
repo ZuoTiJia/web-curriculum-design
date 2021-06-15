@@ -53,7 +53,40 @@ public class Record  {
         this.number = number;
         this.recordType = recordType;
     }
+    public static class RecordGoodsDetail {
+        private int goodsId;
+        private int number;
+        private String name;
+        private double price;
 
+        public int getNumber() {
+            return number;
+        }
+
+        public int getGoodsId() {
+            return goodsId;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public static class RecordGoodsDetailMapRow implements RowMapper<RecordGoodsDetail> {
+            @Override
+            public RecordGoodsDetail mapRow(ResultSet rs, int rowNum) throws SQLException {
+                RecordGoodsDetail res = new RecordGoodsDetail();
+                res.goodsId = rs.getInt("id");
+                res.number = rs.getInt("number");
+                res.name = rs.getString("name");
+                res.price = rs.getDouble("price");
+                return res;
+            }
+        }
+    }
     public static class RecordRowMapper implements RowMapper<Record> {
         @Override
         public Record mapRow(ResultSet rs, int rowNum) throws SQLException {

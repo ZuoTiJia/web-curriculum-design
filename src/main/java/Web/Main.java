@@ -349,9 +349,8 @@ public class Main {
      */
     @GetMapping("/record/{orderId}")
     @ResponseBody
-    public OrderForm getOrder(@PathVariable int orderId) {
-        OrderForm orderForm = DataBase.OrderForm().findOneOrderForm(orderId);
-        return orderForm;
+    public List<Record.RecordGoodsDetail> getOrder(@PathVariable int orderId) {
+        return DataBase.Record().findRecordGoodsDetail(orderId);
     }
 
     /**

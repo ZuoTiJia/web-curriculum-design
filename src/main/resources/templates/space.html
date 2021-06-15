@@ -33,7 +33,7 @@
     </div>
     <div class="layui-row layui-col-space15" th:each="order:${orderFormList}">
         <div class="layui-col-md12">
-            <div class="layui-panel showSingleOrder" th:data="${order.id}">
+            <div class="layui-panel showSingleOrder" th:data-id="${order.id}" th:data-totalPrice="${order.totalPrice}">
                 <div style="padding: 50px 30px;display: inline" th:text="${order.id}"></div>
                 <div style="display: inline" th:text="${order.totalPrice}"></div>
                 <div style="display: inline" th:text="${order.time}"></div>
@@ -48,5 +48,6 @@
 <script src="/js/vue.js"></script>
 <script src="/js/layui.js"></script>
 <script src="/js/base.js"></script>
+<script src="/js/space.js"></script>
 </body>
 </html>
