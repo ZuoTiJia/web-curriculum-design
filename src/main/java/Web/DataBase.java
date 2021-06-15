@@ -119,6 +119,11 @@ public class DataBase {
             String sql = "SELECT * FROM goods WHERE goods_type='Electronics'";
             return jdbcTemplate.query(sql, new Goods.GoodsRowMapper());
         }
+
+        public List<Goods> findRandom5Goods() {
+            String sql = "SELECT * FROM goods ORDER BY RAND() LIMIT 5";
+            return jdbcTemplate.query(sql, new Goods.GoodsRowMapper());
+        }
     }
     public class DataBaseRecord {
         public List<Record> findRecords(long id) {
@@ -127,12 +132,11 @@ public class DataBase {
         }
 
         public void insertRecord(Record record) {
-            String sql = "INSERT INTO records (order_form_id, goods_id, number, record_type, time) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO records (order_form_id, goods_id, `number`, record_type) VALUES(?,?,?,?)";
             jdbcTemplate.update(sql, record.getOrderFormId(),
                     record.getGoodsId(),
                     record.getNumber(),
-                    record.getRecordType().toString(),
-                    new java.sql.Timestamp(record.getTime().getTime()));
+                    record.getRecordType().toString());
         }
 
     }
@@ -158,14 +162,17 @@ public class DataBase {
         }
 
         public int insertAndGetKey(OrderForm orderForm) {
-            String sql = "INSERT INTO order_forms (custom_id, total_price) " +
+            String sql = "INSERT INTO order_forms (custom_phone, total_price) " +
                     "VALUES (?,?)";
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(new PreparedStatementCreator() {
                 @Override
                 public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                     PreparedStatement ps = con.prepareStatement(sql, new String[] {"id"});
-                    ps.setLong(1, 0);
+
+                    ps.setLong(1, orderForm.getCustomPhone());
+                    ps.setDouble(2, orderForm.getTotalPrice());
+
                     return ps;
                 }
             }, keyHolder);

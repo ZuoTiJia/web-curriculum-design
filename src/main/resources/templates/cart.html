@@ -1,0 +1,16 @@
+<div id="cart">
+
+<div class="single-goods" th:each="goods:${goodsList}" >
+    <data th:data="${goods.id}"></data>
+    <img th:src="@{/image/{id}(id=${goods.id})}">
+    <p th:text="'name:' + (${goods.name})"></p>
+    <input class="number" name="number">
+    <p class="price" th:text="'price:'+${goods.price}"></p>
+    <button class="down"><i class="layui-icon layui-icon-addition"></i> </button>
+    <button class="up layui-btn layui-btn-normal"><i class="layui-icon layui-icon-subtraction"></i>   </button>
+</div>
+
+    <div id="all-price">
+        <p></p>
+    </div>
+</div>

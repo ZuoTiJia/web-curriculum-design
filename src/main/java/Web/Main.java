@@ -55,8 +55,15 @@ public class Main {
     @RequestMapping(value="/")
     public String home(Model model) {
 
-        List<Goods> goodsList = DataBase.Goods().findAllGoods();
-        model.addAttribute(goodsList);
+        List<Goods> booksList = DataBase.Goods().findAllBooks();
+        List<Goods> foodList = DataBase.Goods().findAllFood();
+        List<Goods> electronicsList = DataBase.Goods().findAllElectronics();
+        List<Goods> randomList = DataBase.Goods().findRandom5Goods();
+
+        model.addAttribute("booksList", booksList);
+        model.addAttribute("foodList", foodList);
+        model.addAttribute("electronicsList", electronicsList);
+        model.addAttribute("randomList", randomList);
 
         return "home";
     }
@@ -286,7 +293,7 @@ public class Main {
     @RequestMapping("/image/{goodsId}")
     public @ResponseBody byte[] getPhoto (@PathVariable int goodsId) {
 
-        return DataBase.Goods().findOneGoods(goodsId).getPhoto();
+        return DataBase.Goods().findOneGoods(goodsId).requirePhoto();
     }
 
     /**
@@ -321,10 +328,13 @@ public class Main {
     @ResponseBody
     public String orderAdd(@RequestBody OrderForm.Order order) {
         OrderForm orderForm = new OrderForm(order.getCustomPhone(), order.getTotalPrice());
+        System.out.println(orderForm.getCustomPhone());
+        System.out.println(orderForm.getTotalPrice());
+
         int id = DataBase.OrderForm().insertAndGetKey(orderForm);
 
-        OrderForm.Order.GoodsNumber[] goodsNumbers = order.getGoodsNumbers();
-        for(OrderForm.Order.GoodsNumber goodsNumber: goodsNumbers) {
+        OrderForm.GoodsNumber[] goodsNumbers = order.getGoodsNumbers();
+        for(OrderForm.GoodsNumber goodsNumber: goodsNumbers) {
             Record record = new Record(
                     id, goodsNumber.getGoodsId(), goodsNumber.getNumber(), RecordType.Cut);
             DataBase.Record().insertRecord(record);
@@ -354,6 +364,23 @@ public class Main {
     public Iterable<OrderForm> getOrders(@PathVariable long phone) {
         return DataBase.OrderForm().findOrderForms(phone);
     }
+
+    @PostMapping("/cart")
+    public String getCart(@RequestBody OrderForm.GoodsNumber[] goodsNumbers, Model model) {
+        ArrayList<Goods> goodsList = new ArrayList<Goods>();
+
+        for(OrderForm.GoodsNumber goodsNumber: goodsNumbers) {
+            Goods goods = DataBase.Goods().findOneGoods(goodsNumber.getGoodsId());
+            goodsList.add(goods);
+        }
+
+        model.addAttribute("goodsList", goodsList);
+        return "cart";
+    }
+
+
+
+
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);

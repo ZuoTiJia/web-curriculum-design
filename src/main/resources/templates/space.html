@@ -27,13 +27,12 @@
             <h1 th:text="${user.name}"></h1>
         </div>
     </div>
-
     <div class="layui-row layui-col-space15" th:each="order:${orderFormList}">
-
         <div class="layui-col-md12">
-            <div class="layui-panel">
+            <div class="layui-panel showSingleOrder" th:data="${order.id}">
                 <div style="padding: 50px 30px;display: inline" th:text="${order.id}"></div>
                 <div style="display: inline" th:text="${order.totalPrice}"></div>
+                <div style="display: inline" th:text="${order.time}"></div>
             </div>
         </div>
     </div>

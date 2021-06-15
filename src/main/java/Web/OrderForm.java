@@ -9,19 +9,20 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderForm {
-    public static class Order {
-        public static class GoodsNumber {
-            private int goodsId;
-            private int number;
+    public static class GoodsNumber {
+        private int goodsId;
+        private int number;
 
-            public int getGoodsId() {
-                return goodsId;
-            }
-
-            public int getNumber() {
-                return number;
-            }
+        public int getGoodsId() {
+            return goodsId;
         }
+
+        public int getNumber() {
+            return number;
+        }
+    }
+    public static class Order {
+
         private long customPhone;
         private GoodsNumber[] goodsNumbers;
         private double totalPrice;
@@ -46,7 +47,7 @@ public class OrderForm {
 
     private List<Record> recordList;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

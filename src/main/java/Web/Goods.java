@@ -59,6 +59,8 @@ public class Goods  {
 
 
 
+
+
     public Goods() {}
 
     public long getId() {
@@ -88,7 +90,7 @@ public class Goods  {
     public String getPhotoName() {
         return photoName;
     }
-    public byte[] getPhoto() {
+    public byte[] requirePhoto() {
         try {
             String path =  filePath + photoName;
             File photoFile = new File(path);

@@ -1,0 +1,48 @@
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url("/picture/background1.png") no-repeat fixed;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.bg:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: inherit;
+    filter: blur(2px);
+    z-index: 2;
+}
+
+.nobg {
+    position: absolute;
+    left: 100px;
+    right: 100px;
+    top: 100px;
+    background: white;
+    background-size: 100% 100%;
+    z-index: 11;
+}
+
+.showSingleGood {
+    width: 25%;
+    height: 300px;
+    border: 20px solid white;
+    background: whitesmoke;
+    float: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.recommend  {
+    display: inline-block;
+    height: 960px;
+    width: 540px;
+}

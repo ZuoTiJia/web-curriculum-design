@@ -1,25 +1,44 @@
-// $.ajax({
-//
-//     type:"POST",
-//     url:'http://localhost:8080/userRegister',
-//     data: JSON.stringify(user),
-//     contentType: "application/json; charset=utf-8",
-//
-//     success:function (result) {
-//         layer.alert(result);
-//         if(result === "false") {
-//
-//             layer.alert("注册失败, 已存在该用户");
-//
-//         } else {
-//             document.forms["logon"].reset();
-//             window.location = "http://localhost:8080/login";
-//
-//         }
-//
-//     },
-//     error:function (data) {
-//         layer.alert(JSON.stringify(data));
-//     }
-// })
-// $("#space-name").append()
+const orderDetailString = `
+
+<div>
+    <ul>
+        <li v-for="goodsAndNumber in order" @click="showDetail()">
+            <p>{{goodsAndNumber.number}}</p>
+            <p>{{goodsAndNumber.name}}</p>
+            <p>{{goodsAndNumber.price}}</p>
+        </li>
+    </ul>
+<div>
+    <p>{{allPrice}}</p>
+</div>
+</div>
+
+`
+Vue.component('order-detail', {
+    template: orderDetailString,
+    
+})
+
+$(".showSingleOrder").click(function () {
+    let orderId = $(this).attr("data");
+    $.ajax({
+        type: "GET",
+        url: '/order/' + orderId,
+        contentType: "application/json; charset=utf-8",
+
+        success: function (result) {
+            layer.open({
+                type: 1,
+                content: '<div id="order-detail"><order-detail></order-detail></div>'
+            })
+            new Vue({
+                el:'#order-detail',
+                data: {
+                    goodsName:result
+                }
+            })
+
+        }
+
+    })
+})
