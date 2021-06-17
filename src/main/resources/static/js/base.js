@@ -59,24 +59,37 @@ function GoodsAndNumber(goodsId, number, name, price) {
     this.price = price;
 }
 //购物车组件
-cartString =
+//购物车组件
+const cartString =
     `
     <div>
-    <div class="single-goods" v-for="(goodsAndNumber, index) in cart" >
-    <p>{{goodsAndNumber.number}}</p>
-    <p>{{goodsAndNumber.name}}  </p>
-    <p>{{goodsAndNumber.price}}</p>
-    <img :src="'/image/' + goodsAndNumber.goodsId">
-    <button type="button" class="layui-btn layui-btn-normal" @click="subNumber(index)">减少</button>
-    <button type="button" class="layui-btn layui-btn-normal" @click="addNumber(index)">增加</button>
-    </div>
-    
-    <div>
-    <p>{{allPrice}}</p>
-    </div>
-    <div>
-    <button type="button" class="layui-btn-normal layui-btn" @click="commit()"></button>
-    </div>
+        <div>
+            <div class="single-goods" v-for="(goodsAndNumber, index) in cart" style="text-align:center">
+                <img :src="'/image/' + goodsAndNumber.goodsId" style="width:288px; height: 224px;float: left;">
+                <div class="table1" style="width: 400px;height:224px;text-align: center;float: left;">
+                    <div class="div1" style="height:33%">商品数量:</div>
+                    <div class="div2" style="height:33%">{{goodsAndNumber.number}}</div>
+                    <div class="div1" style="height:33%">商品名称:</div>
+                    <div class="div2" style="height:33%">{{goodsAndNumber.name}}</div>
+                    <div class="div1" style="height:33%">商品价格:</div>
+                    <div class="div2" style="height:33%">{{goodsAndNumber.price}}</div>
+                </div>
+                <div style="height: 224px;width: auto;">
+                    <button type="button" class="layui-btn layui-btn-normal" @click="subNumber(index)" >减少</button>
+                    <button type="button" class="layui-btn layui-btn-normal" @click="addNumber(index)" >增加</button>
+                </div>
+                <br>
+                <div style="width: 100%;height: 2px;background: black;overflow: hidden;"></div>
+                <br>
+            </div>
+        </div>
+        <div style="height:100px;text-align:center">
+            <p>总价格为:{{allPrice}}</p>
+        </div>
+        <div style="height:100px;text-align:center">
+            <button type="button" class="layui-btn-normal layui-btn" @click="commit()">点击付款</button>
+        </div>
+        </div>
     </div>
     `
 
@@ -105,10 +118,13 @@ Vue.component('cart', {
         },
         //最终提交
         commit: function () {
-                layer.open({
-                    type:1,
-                    content:'<div id="confirm"><confirm></confirm></div>'
-                })
+            layer.open({
+                type:1,
+                title: '结算界面',
+                area: ['560px', '560px'],
+                maxmin: true,
+                content:'<div id="confirm"><confirm></confirm></div>'
+            })
                 let confirmVue = new Vue({
                     el:"#confirm"
                 });
@@ -165,10 +181,14 @@ Vue.component('nav-component', {
         },
         //展示购物车
         showCart: function () {
-                layer.open({
-                    type: 1,
-                    content: `<div id="cart"><cart></cart></div>`
-                })
+            layer.open({
+                type: 1,
+                title: '购物车界面',
+                area: ['1080px', '560px'],
+                maxmin: true,
+                offset: [($(window).height()-720),($(window).width()-1300)],
+                content: `<div id="cart"><cart></cart></div>`
+            })
                 let cartVue = new Vue({el: "#cart"});
             },
 
@@ -197,16 +217,29 @@ Vue.component('nav-component', {
 //商品详情组件
 const detailString =
     `
-    <div id="detail">
-        <p>{{goods.name}}</p>
-        <p>{{goods.price}}</p>
-        <p>{{goods.businessPhone}}</p>
-        <p>{{goods.remnantInventory}}</p>
-        <p>{{goods.goodsType}}</p>
-        <p>{{goods.describe}}</p>
-        <button class="layui-btn layui-btn-normal" @click="addCart(goods)">添加至购物车</button>
+    <div id="detail" style="text-align:center">
+        <img :src="'/image/' + goods.id" style="width:720px; height: 560px;text-align: center;float: left;">
+        <div style="width: 300px;height:560px; text-align: center;float: left;" class="table1">
+            
+                <div class="div1">商品名称:</div>
+                <div class="div2">{{goods.name}}</div>
+                <div class="div1">商品价格:</div>
+                <div class="div2">{{goods.price}}</div>
+                <div class="div1">商家电话:</div>
+                <div class="div2">{{goods.businessPhone}}</div>
+                <div class="div1">商品库存:</div>
+                <div class="div2">{{goods.remnantInventory}}</div>
+                <div class="div1">商品类型:</div>
+                <div class="div2">{{goods.goodsType}}</div>
+                <div class="div1" style="height: 25%;">详细描述:</div>
+                <div class="div2" style="height: 25%;">{{goods.describe}}</div>
+                <div style="float:left;height:12.5%;width:100%;text-align: center;">
+                    <button class="layui-btn layui-btn-normal" @click="addCart(goods)" style="margin-top:30px" >添加至购物车</button>
+                </div>
+        </div>
     </div>
-    `
+    `;
+
 Vue.component('goods-detail', {
     template: detailString,
     props:['goods'],
@@ -221,8 +254,14 @@ Vue.component('goods-detail', {
 //支付确组件
 const confirmStr =
     `
-     <div>
-     <p>allPrice:{{allPrice}}</p>
+     <div style="text-align:center">
+     <h2>您共需要支付:{{allPrice}}</h2>
+     <br>
+     <br>
+     <div style="height: 320px;width: 320px;margin:0 auto">
+     <img src="/picture/二维码.jpg">
+     <br>
+     </div>
      <button class="layui-btn layui-btn-normal" @click="commitOrder()">支付并确认</button>
      </div>
     `;

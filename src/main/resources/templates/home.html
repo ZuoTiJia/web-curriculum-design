@@ -1,12 +1,69 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-06-15 21:47:32
+ * @LastEditTime: 2021-06-17 16:13:26
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \resources\templates\home.html
+-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <link type="text/css" rel="stylesheet" href="/css/layui.css">
+    <link rel="stylesheet" href="https://unpkg.com/layui@2.6.7/dist/css/layui.css" type="text/css" />
     <link type="text/css" href="/css/home.css">
+    <style type="text/css">
+        .showSingleGood {
+            width: 25%;
+            height: 300px;
+            border: 20px solid white;
+            background: whitesmoke;
+            float: left;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .table1 {
+            font-family: verdana, arial, sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
+
+        .table1 div.div1 {
+            width: 30%;
+            height: 12.5%;
+            float: left;
+            box-sizing: border-box;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;
+        }
+
+        .table1 div.div2 {
+            width: 70%;
+            height: 12.5%;
+            float: left;
+            box-sizing: border-box;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+        }
+    </style>
 </head>
+
 <body>
+
 <div id="nav">
     <nav-component></nav-component>
 </div>
@@ -14,13 +71,13 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;text-align:center">
     <legend style="font-weight: bold;">推荐产品</legend>
 </fieldset>
-
 <!--滚动窗口-->
-<div class="layui-carousel" id="carousel"  style="margin: 0 auto; ">
-    <div carousel-item="" >
-        <div th:each="randomGoods:${randomList}">
-            <a th:text="${randomGoods.id}"></a>
-            <img class="recommend" th:src="@{/image/{id}(id=${randomGoods.id})}">
+<div class="layui-carousel" id="carousel" style="margin: 0 auto; ">
+    <div carousel-item="" style="margin: 0 auto;">
+        <div th:each="randomGoods:${randomList}" style="text-align: center;">
+            <!--                <a th:text="${randomGoods.id}"></a>-->
+            <img class="recommend" th:src="@{/image/{id}(id=${randomGoods.id})}"
+                 style="height: 100%;margin:0 auto;">
         </div>
     </div>
 </div>
@@ -34,35 +91,34 @@
     </ul>
     <div class="layui-tab-content" style="text-align: center">
         <!--书籍-->
-        <div class="layui-tab-item layui-show" >
+        <div class="layui-tab-item layui-show">
             <div class="showSingleGood" th:each="book:${booksList}">
-                <img  th:src="@{/image/{id}(id=${book.id})}" style="width:240px; height: 180px">
+                <img th:src="@{/image/{id}(id=${book.id})}" style="width:240px; height: 180px;text-align: center;">
                 <!--/*@thymesVar id="book" type="Web.Goods"*/-->
-                <span th:text="${book.name}"></span>
+                <p th:text="${book.name}"></p>
                 <p th:text="${book.price}">￥</p>
-                <button  class="layui-btn" th:data="${book.id}">查看详情</button>
+                <button class="layui-btn" th:data="${book.id}">查看详情</button>
             </div>
         </div>
 
         <!--食物-->
         <div class="layui-tab-item ">
             <div class="showSingleGood" th:each="food:${foodList}">
-                <img  th:src="@{/image/{id}(id=${food.id})}"
-                      style="width:240px; height: 180px">
+                <img th:src="@{/image/{id}(id=${food.id})}" style="width:240px; height: 180px;text-align: center;">
                 <!--/*@thymesVar id="book" type="Web.Goods"*/-->
-                <span th:text="${food.name}"></span>
+                <p th:text="${food.name}"></p>
                 <p th:text="${food.price}">￥</p>
-                <button class="layui-btn " >查看详情</button>
+                <button class="layui-btn ">查看详情</button>
             </div>
         </div>
         <!--电子产品-->
         <div class="layui-tab-item ">
             <div class="showSingleGood" th:each="electronic:${electronicsList}">
                 <!--/*@thymesVar id="electronic" type="Web.Goods"*/-->
-                <img  th:src="@{/image/{id}(id=${electronic.id})}"
-                      style="width:240px; height: 180px">
+                <img th:src="@{/image/{id}(id=${electronic.id})}"
+                     style="width:240px; height: 180px;text-align: center;">
                 <!--/*@thymesVar id="book" type="Web.Goods"*/-->
-                <span th:text="${electronic.name}"></span>
+                <p th:text="${electronic.name}"></p>
                 <p th:text="${electronic.price}">￥</p>
                 <button data-mathod="setTop" class="layui-btn">查看详情</button>
             </div>
@@ -80,4 +136,5 @@
 <script src="/js/base.js"></script>
 <script src="/js/home.js"></script>
 </body>
+
 </html>

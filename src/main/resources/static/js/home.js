@@ -26,6 +26,10 @@ $(".showSingleGood").find("button").click(function () {
         success:function (result) {
             layer.open({
                 type: 1,
+                title: '商品详情页',
+                area: ['1080px', '720px'],
+                maxmin: true,
+                offset: [($(window).height()-720),($(window).width()-1300)],
                 content:'<div id="detail"><goods-detail v-bind:goods="goods"></goods-detail></div>'
             });
             //绑定数据

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-06-15 21:47:32
+ * @LastEditTime: 2021-06-17 22:49:25
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \resources\static\js\space.js
+ */
 //订单详情展示
 const orderDetailString = `
 <div>
@@ -17,7 +25,7 @@ const orderDetailString = `
 `
 Vue.component('order-detail', {
     template: orderDetailString,
-    props:['order', 'totalPrice'],
+    props:['order', 'total-price'],
     methods: {
         showGoodsDetail:function (goodsId) {
             $.ajax({
@@ -28,12 +36,15 @@ Vue.component('order-detail', {
                 success: function (result) {
                     layer.open({
                         type: 1,
+                        title: '订单详情',
+                        area: ['560px', '560px'],
+                        maxmin: true,
                         content: '<div id="detail"><goods-detail v-bind:goods="goods"></div>'
                     });
                     new Vue({
                         el: '#detail',
                         data: {
-                            goods:result,
+                            goods:result
                         }
                     })
                 }
@@ -54,7 +65,10 @@ $(".showSingleOrder").click(function () {
         success: function (result) {
             layer.open({
                 type: 1,
-                content: '<div id="order-detail"><order-detail v-bind:order="order" v-bind:totalPrice="totalPrice"></order-detail></div>'
+                title: '订单详情',
+                area: ['560px', '560px'],
+                maxmin: true,
+                content: '<div id="order-detail"><order-detail v-bind:order="order" v-bind:total-price="totalPrice"></order-detail></div>'
             })
             new Vue({
                 el:'#order-detail',
