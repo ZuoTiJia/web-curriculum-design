@@ -318,6 +318,17 @@ public class Main {
         return "add-goods";
     }
 
+    @GetMapping("/canManage/{phone}")
+    @ResponseBody
+    public String canManage(@PathVariable long phone) {
+        User user = DataBase.User().findOneUser(phone);
+        if(user.getUserType() != UserType.Customer) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
 
     /**
      * 记录订单接口

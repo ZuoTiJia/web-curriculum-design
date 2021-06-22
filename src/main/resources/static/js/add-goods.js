@@ -38,12 +38,16 @@ layui.use(['form', 'layedit', 'laydate'], function () {
         //     path: '/'
         // };
         // $.extend(defaults);
-        phone = $.cookie('phone' );
-        if (phone === undefined) {
-            phone = 0
-        } else {
-            phone = Number(phone);
+        let phone = getPhone();
+        if(phone === undefined && phone === 0) {
+            return ;
         }
+        // phone = $.cookie('phone' );
+        // if (phone === undefined) {
+        //     phone = 0
+        // } else {
+        //     phone = Number(phone);
+        // }
 
 
         let good = {
@@ -58,15 +62,11 @@ layui.use(['form', 'layedit', 'laydate'], function () {
             cumulativeSales: Number(document.forms['good-form']['cumulativeSales'].value)
         }
 
-        if (phone === 0) {
-            layer.alert("请重新登录");
-        }
-
 
         $.ajax({
 
             type: "POST",
-            url: 'http://10.151.250.175:8080/goodsAdd',
+            url: '/goodsAdd',
             data: JSON.stringify(good),
 
             contentType: "application/json; charset=utf-8",
@@ -88,9 +88,6 @@ layui.use(['form', 'layedit', 'laydate'], function () {
         })
 
 
-        // layer.alert(JSON.stringify(data.field), {
-        //   title: '最终的提交信息'
-        // })
         return false;
     });
 
@@ -110,7 +107,7 @@ layui.use(['upload', 'element', 'layer'], function () {
     //常规使用 - 普通图片上传
     var uploadInst = upload.render({
         elem: '#test1'
-        , url: 'http://10.151.250.175:8080/upload' //改成您自己的上传接口
+        , url: '/upload' //改成您自己的上传接口
         , before: function (obj) {
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {

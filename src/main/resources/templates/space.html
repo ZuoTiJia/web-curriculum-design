@@ -1,47 +1,50 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-06-18 10:40:34
+ * @LastEditTime: 2021-06-19 12:05:37
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \resources\templates\space.html
+-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link type="text/css" rel="stylesheet" href="/css/layui.css">
-    <style>
-        .profile {
-            border-radius: 50%;
-            width: 20vmin;
-            height: 20vmin;
-            object-fit: cover;
-            object-position: center;
-            text-align: center;
-            margin-top: 50px;
-            margin-bottom: 50px;
-        }
-    </style>
+    <link type="text/css" rel="stylesheet" href="/css/space.css">
 </head>
+
 <body>
 <div id="nav">
     <nav-component></nav-component>
 </div>
 
-<div class="layui-bg-gray" style="padding: 30px;">
-    <div style="text-align: center;margin-top: 30px;">
-        <img src="https://t.cn/RCzsdCq" class="layui-nav-img profile">
-        <br>
+<div class="fixed-bg"></div>
 
-        <div style="margin-bottom: 30px;">
-            <h1 th:text="${user.name}"></h1>
-        </div>
+<!-- <div class="layui-bg-gray" style="padding: 30px;"> -->
+<div style="text-align: center;margin-top: 30px;">
+    <img src="/picture/dongma.jpg" class="layui-nav-img profile">
+    <br>
+    <div style="margin-bottom: 30px;">
+        <h1 th:text="${user.name}"></h1>
     </div>
-    <div class="layui-row layui-col-space15" th:each="order:${orderFormList}">
-        <div class="layui-col-md12">
-            <div class="layui-panel showSingleOrder" th:data-id="${order.id}" th:data-totalPrice="${order.totalPrice}">
-                <div style="padding: 50px 30px;display: inline" th:text="${order.id}"></div>
-                <div style="display: inline" th:text="${order.totalPrice}"></div>
-                <div style="display: inline" th:text="${order.time}"></div>
-            </div>
-        </div>
-    </div>
-
 </div>
+
+<h1 style="margin-left: 220px;">订单记录:</h1>
+<br>
+<div class="tab" th:each="order:${orderFormList}" style="margin-top: 10px;">
+    <div class="showSingleOrder" th:data-id="${order.id}" th:data-totalPrice="${order.totalPrice}">
+        <i>订单id:</i>
+        <div style="display: inline" th:text="${order.id}"></div><br>
+        <i>订单总价格:</i>
+        <div style="display: inline" th:text="${#numbers.formatDecimal(order.totalPrice, 1, 2)} + '￥'"></div><br>
+        <i>交易时间:</i>
+        <div style="display: inline" th:text="${order.time}"></div>
+    </div>
+</div>
+
 
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/jquery.cookie-1.4.1.min.js"></script>
@@ -50,4 +53,5 @@
 <script src="/js/base.js"></script>
 <script src="/js/space.js"></script>
 </body>
-</html>
+
+</html>>

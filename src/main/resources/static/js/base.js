@@ -45,7 +45,7 @@ function getPhone() {
             type: 1,
             content: `
             <p>登陆过期 请重新登陆</p>
-            <button class="layui-btn layui-btn-normal" onclick="window.location.replace('login')">确认</button>
+            <button class="layui-btn layui-btn-normal" onclick="window.location.replace('/login')">确认</button>
             `
         })
     } else {
@@ -67,26 +67,29 @@ const cartString =
             <div class="single-goods" v-for="(goodsAndNumber, index) in cart" style="text-align:center">
                 <img :src="'/image/' + goodsAndNumber.goodsId" style="width:288px; height: 224px;float: left;">
                 <div class="table1" style="width: 400px;height:224px;text-align: center;float: left;">
-                    <div class="div1" style="height:33%">商品数量:</div>
-                    <div class="div2" style="height:33%">{{goodsAndNumber.number}}</div>
-                    <div class="div1" style="height:33%">商品名称:</div>
-                    <div class="div2" style="height:33%">{{goodsAndNumber.name}}</div>
-                    <div class="div1" style="height:33%">商品价格:</div>
-                    <div class="div2" style="height:33%">{{goodsAndNumber.price}}</div>
-                </div>
-                <div style="height: 224px;width: auto;">
-                    <button type="button" class="layui-btn layui-btn-normal" @click="subNumber(index)" >减少</button>
-                    <button type="button" class="layui-btn layui-btn-normal" @click="addNumber(index)" >增加</button>
+                    <div class="div1" style="height:33%"><br>商品数量:</div>
+                    <div class="div2" style="height:33%">
+                    <i class="layui-icon subNumber" @click="subNumber(index)">&#xe67e;</i> 
+                    {{goodsAndNumber.number}}
+                    <i class="layui-icon addNumber" @click="addNumber(index)">&#xe624;</i> 
+                    <br>
+                    <br>
+                    <p style="text-align:center">点击加减号修改数量</p>
+                    </div>
+                    <div class="div1" style="height:33%"><br>商品名称:</div>
+                    <div class="div2" style="height:33%"><br>{{goodsAndNumber.name}}</div>
+                    <div class="div1" style="height:33%"><br>商品价格:</div>
+                    <div class="div2" style="height:33%"><br>{{goodsAndNumber.price | numFilter}}</div>
                 </div>
                 <br>
                 <div style="width: 100%;height: 2px;background: black;overflow: hidden;"></div>
                 <br>
             </div>
         </div>
-        <div style="height:100px;text-align:center">
-            <p>总价格为:{{allPrice}}</p>
+        <div style="text-align:center">
+            <h3>总价格为:{{allPrice() | numFilter}}</h3>
         </div>
-        <div style="height:100px;text-align:center">
+        <div style="text-align:center;">
             <button type="button" class="layui-btn-normal layui-btn" @click="commit()">点击付款</button>
         </div>
         </div>
@@ -100,17 +103,16 @@ Vue.component('cart', {
             cart: cart,
         }
     },
-    computed: {
-        allPrice: getAllPrice
-    },
     methods: {
         //减少单件商品数量
         subNumber: function (index) {
 
             if(cart[index].number == 1) {
-                cart[index].splice(index, 1);
+                cart.splice(index, 1);
+            } else {
+                cart[index].number -= 1;
             }
-            cart[index].number -= 1;
+
         },
         //添加单件商品数量
         addNumber: function (index) {
@@ -125,10 +127,18 @@ Vue.component('cart', {
                 maxmin: true,
                 content:'<div id="confirm"><confirm></confirm></div>'
             })
-                let confirmVue = new Vue({
-                    el:"#confirm"
-                });
-            }
+            let confirmVue = new Vue({
+                el:"#confirm"
+            });
+        },
+        allPrice: function () {
+            return getAllPrice()
+        }
+    },
+    filters: {
+        numFilter(value) {
+            return parseFloat(value).toFixed(2)
+        }
     }
 })
 
@@ -136,7 +146,7 @@ Vue.component('cart', {
 
 //导航栏 组件
 const navStr =
-`
+    `
 <div>
 <ul class="layui-nav" lay-filter=""  >
     <li class="layui-nav-item">
@@ -158,9 +168,13 @@ const navStr =
         </span>
     </li>
     <li class="layui-nav-item">
-    <a @click="space()"><img src="https://t.cn/RCzsdCq" class="layui-nav-img">我</a>
+        <span title="这是管理商品界面">
+            <a @click="goodsManage(); return 0;"><i class="layui-icon layui-icon-console"></i>管理商品</a>    
+        </span>
+    </li>
+    <li class="layui-nav-item">
+    <a @click="space()"><img src="/picture/dongma.jpg" class="layui-nav-img">我</a>
     <dl class="layui-nav-child">
-<!--      <dd><a href="javascript:;">修改信息</a></dd>-->
       <dd><a @click="logout()">退出登录</a></dd>
     </dl>
   </li>
@@ -184,13 +198,13 @@ Vue.component('nav-component', {
             layer.open({
                 type: 1,
                 title: '购物车界面',
-                area: ['1080px', '560px'],
+                area: ['720px', '560px'],
                 maxmin: true,
-                offset: [($(window).height()-720),($(window).width()-1300)],
+                offset: [($(window).height()-650),($(window).width()-1100)],
                 content: `<div id="cart"><cart></cart></div>`
             })
-                let cartVue = new Vue({el: "#cart"});
-            },
+            let cartVue = new Vue({el: "#cart"});
+        },
 
         //退出登录
         logout:function logout() {
@@ -198,17 +212,34 @@ Vue.component('nav-component', {
                 type:"GET",
                 url:'/userLogout',
                 success:function (result) {
-                    alert(result);
                     if(result === "false") {
-                        alert("注册失败, 已存在该用户");
+                        layer.alert("注册失败, 已存在该用户");
                     } else {
-                        window.location = "/login";
+                        window.location.replace("/login");
                     }
                 },
                 error:function (data) {
                     alert(JSON.stringify(data));
                 }
             })
+        },
+        goodsManage: function () {
+            let phone = getPhone();
+            if(phone) {
+                $.ajax({
+                    type: "GET",
+                    url: '/canManage/' + phone,
+                    success:function (result) {
+                        if(result === 'true') {
+                            window.location.replace('/manageGoods')
+                        } else {
+                            layer.alert("你没有权限进入");
+                        }
+                    }
+                })
+
+            }
+
         }
 
     }
@@ -224,7 +255,7 @@ const detailString =
                 <div class="div1">商品名称:</div>
                 <div class="div2">{{goods.name}}</div>
                 <div class="div1">商品价格:</div>
-                <div class="div2">{{goods.price}}</div>
+                <div class="div2">{{goods.price | numFilter}}￥</div>
                 <div class="div1">商家电话:</div>
                 <div class="div2">{{goods.businessPhone}}</div>
                 <div class="div1">商品库存:</div>
@@ -247,6 +278,11 @@ Vue.component('goods-detail', {
         addCart:function (goodsId) {
             addCart(goodsId);
             layer.alert("添加成功");
+        }
+    },
+    filters: {
+        numFilter(value) {
+            return parseFloat(value).toFixed(2);
         }
     }
 })
@@ -303,30 +339,3 @@ Vue.component("confirm", {
     }
 })
 new Vue({el:'#nav'});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

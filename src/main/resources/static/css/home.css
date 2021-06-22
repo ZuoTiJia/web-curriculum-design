@@ -1,48 +1,262 @@
-.bg {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: url("/picture/background1.png") no-repeat fixed;
-    background-size: 100% 100%;
-    box-sizing: border-box;
-    z-index: 1;
+.table1 {
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
 }
 
-.bg:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background: inherit;
-    filter: blur(2px);
-    z-index: 2;
-}
-
-.nobg {
-    position: absolute;
-    left: 100px;
-    right: 100px;
-    top: 100px;
-    background: white;
-    background-size: 100% 100%;
-    z-index: 11;
-}
-
-.showSingleGood {
-    width: 25%;
-    height: 300px;
-    border: 20px solid white;
-    background: whitesmoke;
+.table1 div.div1 {
+    width: 30%;
+    height: 12.5%;
     float: left;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
 }
 
-.recommend  {
+.table1 div.div2 {
+    width: 70%;
+    height: 12.5%;
+    float: left;
+    box-sizing: border-box;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    --swiper-theme-color: #ff6600;
+    /* 设置Swiper风格 */
+    --swiper-navigation-color: #00ff33;
+    /* 单独设置按钮颜色 */
+    --swiper-navigation-size: 30px;
+    /* 设置按钮大小 */
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    width: 80%;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide:nth-child(2n) {
+    width: 60%;
+}
+
+.swiper-slide:nth-child(3n) {
+    width: 40%;
+}
+
+.box {
+    float: left;
+    width: 280px;
+    overflow: hidden;
+    background: #f6f6f6;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-top: 25px;
+    padding-right: 15px;
+    padding-bottom: 25px;
+    padding-left: 15px;
+    position: relative;
+    height: 328px;
+    text-align: center;
+}
+
+#box-left {
+    margin-left: 14px;
+}
+
+.box .a {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    color: #535353;
+    text-decoration: none;
+}
+
+.box .a:hover {
+    color: #e52d67;
+}
+
+.imgBox {
+    margin: 0 auto;
+    width: 250px;
+    height: 187px;
+    overflow: hidden;
+}
+
+.imgBox img {
+    width: 100%;
+    height: 100%;
+    transition: all 0.6s linear;
+}
+
+.source {
+    border: 1px solid #535353;
+    padding: 6px 20px;
+    border-radius: 25px;
+    margin: 20px;
+}
+
+.title {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.detail {
+    font-size: 14px;
+    line-height: 160%;
+    text-align: justify;
+    width: 100%;
+}
+
+.box>a::after {
+    content: '';
+    width: 280px;
+    position: absolute;
+    background: #e52d67;
+    bottom: 0;
+    height: 0px;
+    transition: height 0.3s linear;
+
+}
+
+
+.box:hover img {
+    transform: scale(1.15);
+}
+
+.box:hover .source {
+    background: #e52d67;
+    border-color: #e52d67;
+    color: #ffffff;
+}
+
+.btn {
+    font-size: 16px;
+    vertical-align: sub;
+    text-align: justify;
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    border: 2px solid #F00;
+}
+
+.mt-tabpage {
+
+    width: 90%;
+    overflow-x: hidden;
+    height: 800px;
+    margin: 30px auto;
+    box-shadow: 0 0 5px #999;
+    background-color: #FFFFFF;
+}
+
+.mt-tabpage img:hover {
+    font-size: 20px;
+    transform: scale(1.1);
+}
+
+.mt-tabpage-title {
+    height: 44px;
+    font-size: 0;
+    background-color: #fff;
+    width: 94%;
+    margin: auto;
+    background: #fff;
+    border-bottom: 1px solid #f1f1f1;
+    text-align: center;
+}
+
+.mt-tabpage-title .mt-tabpage-item {
     display: inline-block;
-    height: 960px;
-    width: 540px;
+    width: 105px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    color: #666;
+    font-size: 20px;
+}
+
+.mt-tabpage-title .mt-tabpage-item:hover {
+    color: #eb4537;
+}
+
+.mt-tabpage-title .mt-tabpage-item-cur {
+    color: #eb4537;
+    font-size: 24px;
+    border-bottom: 1px solid #F85B5E;
+}
+
+.mt-tabpage-count {
+    position: absolute;
+    width: 90%;
+}
+
+.mt-tabpage-cont__wrap {
+    overflow-x: hidden;
+    position: absolute;
+}
+
+.mt-tabpage-count .mt-tabpage-item {
+    width: 1440px;
+    text-align: center;
+}
+
+.slide-content {
+    padding: 0px;
+    height: 680px;
+    width: 100%;
+    float: left;
+    margin-left: 50px;
+}
+
+.slide-content-text {
+    height: 32px;
+    margin-top: 0px;
+    padding-top: 8px;
+    font-size: 20px;
+}
+.addNumber:hover{
+    color: #eb4537;
+}
+.subNumber:hover{
+    color: #eb4537;
+}
+.fixed-bg-home{
+    position:fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/picture/bgForHome2.jpeg);
+    background-size:cover;
+    background-position: center;
 }

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 21:47:32
- * @LastEditTime: 2021-06-17 16:13:26
+ * @LastEditTime: 2021-06-19 12:18:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \resources\templates\home.html
@@ -13,116 +13,104 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link type="text/css" rel="stylesheet" href="/css/layui.css">
-    <link rel="stylesheet" href="https://unpkg.com/layui@2.6.7/dist/css/layui.css" type="text/css" />
-    <link type="text/css" href="/css/home.css">
-    <style type="text/css">
-        .showSingleGood {
-            width: 25%;
-            height: 300px;
-            border: 20px solid white;
-            background: whitesmoke;
-            float: left;
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-        }
-
-        .table1 {
-            font-family: verdana, arial, sans-serif;
-            font-size: 11px;
-            color: #333333;
-            border-width: 1px;
-            border-color: #666666;
-            border-collapse: collapse;
-        }
-
-        .table1 div.div1 {
-            width: 30%;
-            height: 12.5%;
-            float: left;
-            box-sizing: border-box;
-            border-width: 1px;
-            padding: 8px;
-            border-style: solid;
-            border-color: #666666;
-            background-color: #dedede;
-        }
-
-        .table1 div.div2 {
-            width: 70%;
-            height: 12.5%;
-            float: left;
-            box-sizing: border-box;
-            border-width: 1px;
-            padding: 8px;
-            border-style: solid;
-            border-color: #666666;
-            background-color: #ffffff;
-        }
-    </style>
+    <link type="text/css"  rel="stylesheet" href="/css/home.css">
+    <link type="text/css" rel="stylesheet" href="/css/swiper-bundle.css">
+    <script src="/js/swiper-bundle.js"> </script>
 </head>
 
-<body>
+<body style="overflow-x:hidden;">
 
 <div id="nav">
     <nav-component></nav-component>
 </div>
 
+<div class="fixed-bg-home"></div>
+
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;text-align:center">
-    <legend style="font-weight: bold;">推荐产品</legend>
+    <legend style="font-weight: bold;">畅销产品</legend>
 </fieldset>
-<!--滚动窗口-->
-<div class="layui-carousel" id="carousel" style="margin: 0 auto; ">
-    <div carousel-item="" style="margin: 0 auto;">
-        <div th:each="randomGoods:${randomList}" style="text-align: center;">
-            <!--                <a th:text="${randomGoods.id}"></a>-->
-            <img class="recommend" th:src="@{/image/{id}(id=${randomGoods.id})}"
-                 style="height: 100%;margin:0 auto;">
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div th:each="randomGoods:${randomList}" class="swiper-slide" style="text-align: center;">
+            <img class="recommend" th:src="@{/image/{id}(id=${randomGoods.id})}" th:data="${randomGoods.id}"
+                 style="width: 100%;height: 540px;; display:table-cell;vertical-align:middle">
         </div>
     </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
+    <div class="swiper-button-next"></div>
+    <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
 </div>
 
-<div class="layui-tab " style="width: 100%">
+<br>
+<br>
 
-    <ul class="layui-tab-title" style="text-align: center">
-        <li class="layui-this " style="font-weight: bold; width:30%;">书籍</li>
-        <li class="" style="font-weight: bold;width:30%;">食物</li>
-        <li class="" style="font-weight: bold;width:30%;">电子设备</li>
-    </ul>
-    <div class="layui-tab-content" style="text-align: center">
-        <!--书籍-->
-        <div class="layui-tab-item layui-show">
-            <div class="showSingleGood" th:each="book:${booksList}">
-                <img th:src="@{/image/{id}(id=${book.id})}" style="width:240px; height: 180px;text-align: center;">
-                <!--/*@thymesVar id="book" type="Web.Goods"*/-->
-                <p th:text="${book.name}"></p>
-                <p th:text="${book.price}">￥</p>
-                <button class="layui-btn" th:data="${book.id}">查看详情</button>
-            </div>
-        </div>
-
-        <!--食物-->
-        <div class="layui-tab-item ">
-            <div class="showSingleGood" th:each="food:${foodList}">
-                <img th:src="@{/image/{id}(id=${food.id})}" style="width:240px; height: 180px;text-align: center;">
-                <!--/*@thymesVar id="book" type="Web.Goods"*/-->
-                <p th:text="${food.name}"></p>
-                <p th:text="${food.price}">￥</p>
-                <button class="layui-btn ">查看详情</button>
-            </div>
-        </div>
-        <!--电子产品-->
-        <div class="layui-tab-item ">
-            <div class="showSingleGood" th:each="electronic:${electronicsList}">
-                <!--/*@thymesVar id="electronic" type="Web.Goods"*/-->
-                <img th:src="@{/image/{id}(id=${electronic.id})}"
-                     style="width:240px; height: 180px;text-align: center;">
-                <!--/*@thymesVar id="book" type="Web.Goods"*/-->
-                <p th:text="${electronic.name}"></p>
-                <p th:text="${electronic.price}">￥</p>
-                <button data-mathod="setTop" class="layui-btn">查看详情</button>
-            </div>
-        </div>
+<div class="mt-tabpage" js-tab="2">
+    <div class="mt-tabpage-title">
+        <a href="javascript:;" class="mt-tabpage-item mt-tabpage-item-cur">书籍</a>
+        <a href="javascript:;" class="mt-tabpage-item">食品</a>
+        <a href="javascript:;" class="mt-tabpage-item">电子设备</a>
+    </div>
+    <div class="mt-tabpage-count">
+        <ul class="mt-tabpage-cont__wrap">
+            <li class="mt-tabpage-item">
+                <div class="slide-content">
+                    <div class="box" th:each="book:${booksList}">
+                        <div class="a">
+                            <div class="imgBox">
+                                <img th:src="@{/image/{id}(id=${book.id})}"
+                                     style="width:240px; height: 180px;text-align: center;">
+                            </div>
+                            <!--/*@thymesVar id="book" type="Web.Goods"*/-->
+                            <h2 class="title" th:text="${book.name}" style="text-align: center;"></h2>
+                            <p style="text-align: center;">
+                                <span class="detail" th:text="${#numbers.formatDecimal(book.price, 1, 2)} + '￥'">￥</span>
+                            </p>
+                            <button class="layui-btn" th:data="${book.id}">查看详情</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="mt-tabpage-item">
+                <div class="slide-content">
+                    <div class="box" th:each="food:${foodList}">
+                        <div class="a">
+                            <div class="imgBox">
+                                <img th:src="@{/image/{id}(id=${food.id})}"
+                                     style="width:240px; height: 180px;text-align: center;">
+                            </div>
+                            <!--/*@thymesVar id="book" type="Web.Goods"*/-->
+                            <h2 class="title" th:text="${food.name}" style="text-align: center;"></h2>
+                            <p style="text-align: center;">
+                                <span class="detail" th:text="${#numbers.formatDecimal(food.price, 1, 2)} + '￥'">￥</span>
+                            </p>
+                            <button class="layui-btn " th:data="${food.id}">查看详情</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="mt-tabpage-item">
+                <div class="slide-content">
+                    <div class="box" th:each="electronic:${electronicsList}">
+                        <div class="a">
+                            <!--/*@thymesVar id="electronic" type="Web.Goods"*/-->
+                            <div class="imgBox">
+                                <img th:src="@{/image/{id}(id=${electronic.id})}"
+                                     style="width:240px; height: 180px;text-align: center;">
+                            </div>
+                            <!--/*@thymesVar id="book" type="Web.Goods"*/-->
+                            <h2 class="title" th:text="${electronic.name}" style="text-align: center;"></h2>
+                            <p style="text-align: center;">
+                                <span class="detail" th:text="${#numbers.formatDecimal(electronic.price, 1, 2)} + '￥'">￥</span>
+                            </p>
+                            <button class="layui-btn" th:data="${electronic.id}">查看详情</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -132,9 +120,10 @@
 <script src="/js/vue.js"></script>
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/jquery.cookie-1.4.1.min.js"></script>
-
 <script src="/js/base.js"></script>
 <script src="/js/home.js"></script>
+<script src="/js/mt-tabpage.js"></script>
+
 </body>
 
 </html>
